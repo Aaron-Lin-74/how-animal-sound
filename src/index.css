@@ -1,3 +1,15 @@
+/* 
+====== 
+Variables 
+======
+*/
+:root {
+  --maxWidth: 40rem;
+  --smallWidth: 85vw;
+  --lightShadow: 0px 0.15rem 0.5rem;
+  --mainBorderRadius: 0.25rem;
+  --backgroundColor: #353535;
+}
 * {
   margin: 0;
   padding: 0;
@@ -10,12 +22,50 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgba(19, 19, 19, 0.8);
+}
+/* 
+====== 
+Form
+======
+*/
+.search {
+  padding: 5rem 0;
+  margin-top: 1rem;
+  padding-bottom: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.search-form {
+  width: var(--smallWidth);
+  margin: 0 auto;
+  max-width: var(--maxWidth);
+  background: var(--backgroundColor);
+  padding: 2.5rem 2.5rem;
+  text-transform: capitalize;
+  border-radius: var(--mainBorderRadius);
+  box-shadow: var(--lightShadow);
 }
+
+.search-form label {
+  display: block;
+  margin-bottom: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.25rem;
+  color: #fff;
+}
+
+.search-form input {
+  width: 100%;
+  border: none;
+  border-color: transparent;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+/* 
+====== 
+Gallery
+======
+*/
 .gallery-container {
   position: relative;
   top: 15vh;
@@ -42,13 +92,13 @@ code {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: #353535;
+  background: var(--backgroundColor);
   font-size: 1rem;
   color: #fff;
-  box-shadow: 0px 0.15rem 0.5rem;
+  box-shadow: var(--lightShadow);
   height: 100%;
   width: 100%;
-  border-radius: 4px;
+  border-radius: var(--mainBorderRadius);
   transition: all 500ms;
   overflow: hidden;
 
