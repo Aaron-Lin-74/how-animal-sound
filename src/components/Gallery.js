@@ -1,13 +1,23 @@
 import React from 'react'
 import { useGlobalContext } from '../context'
 import AnimalCard from './AnimalCard'
+import {
+  FcAlphabeticalSortingAz,
+  FcAlphabeticalSortingZa,
+} from 'react-icons/fc'
 
 const Gallery = () => {
   const { animals, sortAnimals, sortAnimalsDesc } = useGlobalContext()
   return (
     <div className='gallery-container'>
-      <button onClick={sortAnimals}>Sort A-Z </button>
-      <button onClick={sortAnimalsDesc}>Sort Z-A </button>
+      <button onClick={sortAnimals}>
+        <FcAlphabeticalSortingAz />
+        Sort A-Z{' '}
+      </button>
+      <button onClick={sortAnimalsDesc}>
+        <FcAlphabeticalSortingZa />
+        Sort Z-A{' '}
+      </button>
       <div className='card-grid'>
         {animals.map((animal) => {
           return (
