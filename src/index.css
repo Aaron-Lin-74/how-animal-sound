@@ -6,7 +6,7 @@ Variables
 :root {
   --maxWidth: 40rem;
   --smallWidth: 85vw;
-  --lightShadow: 0px 0.15rem 0.5rem;
+  --lightShadow: rgba(248, 248, 248, 0.8) 0px 0.15rem 0.5rem;
   --mainBorderRadius: 0.25rem;
   --backgroundColor: #353535;
 }

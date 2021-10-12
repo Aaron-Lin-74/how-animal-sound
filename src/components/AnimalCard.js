@@ -12,15 +12,16 @@ const AnimalCard = ({ name, image, audio, link }) => {
 
   const stopSound = () => {
     if (!sound.paused) {
-      sound.pause()
+      setTimeout(() => sound.pause(), 1000)
     }
   }
+
   return (
     <div className='animal-card'>
       <img
         className='animal-img'
         src={image}
-        alt={`${name} is roaring`}
+        alt={`${name} is making sound`}
         onClick={toggleSound}
         onMouseLeave={stopSound}
       />
