@@ -3,18 +3,20 @@ import { useGlobalContext } from '../context'
 import AnimalCard from './AnimalCard'
 
 const Gallery = () => {
-  const { animals } = useGlobalContext()
+  const { animals, sortAnimals, sortAnimalsDesc } = useGlobalContext()
   return (
     <div className='gallery-container'>
+      <button onClick={sortAnimals}>Sort A-Z </button>
+      <button onClick={sortAnimalsDesc}>Sort Z-A </button>
       <div className='card-grid'>
-        {animals.map((item) => {
+        {animals.map((animal) => {
           return (
             <AnimalCard
-              key={item.id}
-              name={item.name}
-              image={item.image}
-              audio={item.audio}
-              link={item.link}
+              key={animal.id}
+              name={animal.name}
+              image={animal.image}
+              audio={animal.audio}
+              link={animal.link}
             />
           )
         })}
