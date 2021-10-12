@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
+import animals from './data'
 
 const AppContext = React.createContext()
-
 const AppProvider = ({ children }) => {
-  return <AppContext.Provider>{children}</AppContext.Provider>
+  return (
+    <AppContext.Provider value={{ animals }}>{children}</AppContext.Provider>
+  )
 }
 
 export const useGlobalContext = () => {
