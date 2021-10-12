@@ -9,6 +9,12 @@ const AnimalCard = ({ name, image, audio, link }) => {
       sound.pause()
     }
   }
+
+  const stopSound = () => {
+    if (!sound.paused) {
+      sound.pause()
+    }
+  }
   return (
     <div className='animal-card'>
       <img
@@ -16,6 +22,7 @@ const AnimalCard = ({ name, image, audio, link }) => {
         src={image}
         alt={`${name} is roaring`}
         onClick={toggleSound}
+        onMouseLeave={stopSound}
       />
       {/* <h4 className="animal-name">{name.charAt(0).toUpperCase() + name.slice(1)}</h4> */}
       <div className='animal-card-footer'>
