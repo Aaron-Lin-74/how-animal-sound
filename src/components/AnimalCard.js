@@ -17,7 +17,7 @@ const AnimalCard = ({ name, image, audio, link }) => {
   }
 
   return (
-    <div className='animal-card'>
+    <div className={`animal-card ${name}`}>
       <img
         className='animal-img'
         src={image}

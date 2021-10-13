@@ -24,7 +24,8 @@ const Gallery = () => {
         {animals.map((animal) => {
           return (
             <AnimalCard
-              key={animal.id}
+              // Adding a changing key will make react think it's a different component when the key changes, so it'll unmount it and mount again.
+              key={Math.random()}
               name={animal.name}
               image={animal.image}
               audio={animal.audio}
