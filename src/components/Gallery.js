@@ -7,7 +7,8 @@ import {
 } from 'react-icons/fc'
 
 const Gallery = () => {
-  const { animals, sortAnimals, sortAnimalsDesc } = useGlobalContext()
+  const { animals, sortAnimals, sortAnimalsDesc, shuffleAnimals } =
+    useGlobalContext()
   return (
     <div className='gallery-container'>
       <button onClick={sortAnimals}>
@@ -18,6 +19,7 @@ const Gallery = () => {
         <FcAlphabeticalSortingZa />
         Sort Z-A{' '}
       </button>
+      <button onClick={shuffleAnimals}>Shuffle</button>
       <div className='card-grid'>
         {animals.map((animal) => {
           return (

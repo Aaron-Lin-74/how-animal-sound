@@ -47,9 +47,23 @@ const AppProvider = ({ children }) => {
     })
     setAnimals([...animalList])
   }
+
+  const shuffleAnimals = () => {
+    animalList.sort((animal1, animal2) => {
+      return 0.5 - Math.random()
+    })
+    setAnimals([...animalList])
+  }
+
   return (
     <AppContext.Provider
-      value={{ animals, setSearchTerm, sortAnimals, sortAnimalsDesc }}
+      value={{
+        animals,
+        setSearchTerm,
+        sortAnimals,
+        sortAnimalsDesc,
+        shuffleAnimals,
+      }}
     >
       {children}
     </AppContext.Provider>
