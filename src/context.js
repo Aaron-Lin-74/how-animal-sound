@@ -1,10 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import animalList from './data'
 
 const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [animals, setAnimals] = useState(animalList)
   const [searchTerm, setSearchTerm] = useState('')
+  const [isPlayMode, setIsPlayMode] = useState(true)
+  // useRef does not trigger the re-render
+  const randomPickAnimal = useRef('')
+  const selectedAnimal = useRef(null)
 
   // Load the data from data.js, could implement API fetch in the future
   useEffect(() => {
@@ -55,6 +59,29 @@ const AppProvider = ({ children }) => {
     setAnimals([...animalList])
   }
 
+  // In play mode, play a random animal sound to begin the play.
+  const playRandomSound = () => {
+    const randomPickNum = Math.floor(animals.length * Math.random())
+    randomPickAnimal.current = animals[randomPickNum].name
+    console.log(randomPickAnimal.current)
+    const sound = new Audio(animals[randomPickNum].audio)
+    sound.play()
+  }
+
+  const checkResult = (name) => {
+    // const guessAnimal = divRef.current.className.slice(11)
+    selectedAnimal.current = name
+    console.log(selectedAnimal)
+    if (selectedAnimal.current === randomPickAnimal.current) {
+      window.alert("Yes! That's correct!")
+    } else {
+      window.alert(
+        'No, try again. Or you can click play button to start a new one.'
+      )
+    }
+  }
+  // In play mode, check the picked result is right or wrong
+
   return (
     <AppContext.Provider
       value={{
@@ -63,6 +90,9 @@ const AppProvider = ({ children }) => {
         sortAnimals,
         sortAnimalsDesc,
         shuffleAnimals,
+        playRandomSound,
+        checkResult,
+        isPlayMode,
       }}
     >
       {children}
