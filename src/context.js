@@ -9,6 +9,8 @@ const AppProvider = ({ children }) => {
   // useRef does not trigger the re-render
   const randomPickAnimal = useRef('')
   const selectedAnimal = useRef(null)
+  // make sure only one sound is in play
+  const sound = useRef(null)
 
   // Load the data from data.js, could implement API fetch in the future
   useEffect(() => {
@@ -63,21 +65,24 @@ const AppProvider = ({ children }) => {
   const playRandomSound = () => {
     const randomPickNum = Math.floor(animals.length * Math.random())
     randomPickAnimal.current = animals[randomPickNum].name
-    console.log(randomPickAnimal.current)
-    const sound = new Audio(animals[randomPickNum].audio)
-    sound.play()
+    sound.current = new Audio(animals[randomPickNum].audio)
+    sound.current.play()
   }
 
   const checkResult = (name) => {
+    // stop the current sound
+    sound.current.pause()
     // const guessAnimal = divRef.current.className.slice(11)
     selectedAnimal.current = name
-    console.log(selectedAnimal)
     if (selectedAnimal.current === randomPickAnimal.current) {
-      window.alert("Yes! That's correct!")
+      const correctText = `Great! You choose the right animal!
+      Press ok if you would like to play another one. Otherwise press cancel.`
+      if (window.confirm(correctText)) {
+        playRandomSound()
+      }
     } else {
-      window.alert(
-        'No, try again. Or you can click play button to start a new one.'
-      )
+      const wrongText = `Sorry you didn't choose the right animal. Have another try.`
+      window.confirm(wrongText)
     }
   }
   // In play mode, check the picked result is right or wrong
