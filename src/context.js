@@ -70,6 +70,11 @@ const AppProvider = ({ children }) => {
   }
 
   const checkResult = (name) => {
+    // need to start the play first
+    if (randomPickAnimal.current === '') {
+      window.confirm('Please press the play button first to start.')
+      return
+    }
     // stop the current sound
     sound.current.pause()
     // const guessAnimal = divRef.current.className.slice(11)
