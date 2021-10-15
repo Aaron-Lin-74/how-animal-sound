@@ -5,7 +5,7 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [animals, setAnimals] = useState(animalList)
   const [searchTerm, setSearchTerm] = useState('')
-  const [isPlayMode, setIsPlayMode] = useState(true)
+
   // useRef does not trigger the re-render
   const randomPickAnimal = useRef('')
   const selectedAnimal = useRef(null)
@@ -92,7 +92,6 @@ const AppProvider = ({ children }) => {
         shuffleAnimals,
         playRandomSound,
         checkResult,
-        isPlayMode,
       }}
     >
       {children}

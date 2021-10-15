@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import { useGlobalContext } from '../context'
+import { useLocation } from 'react-router-dom'
 
 const AnimalCard = ({ name, image, audio, link }) => {
-  const { isPlayMode, checkResult } = useGlobalContext()
+  const { checkResult } = useGlobalContext()
   const sound = new Audio(audio)
   const toggleSound = () => {
     if (sound.paused) {
@@ -20,7 +21,8 @@ const AnimalCard = ({ name, image, audio, link }) => {
 
   const divRef = useRef(null)
 
-  // Conditional rendering, check whether is in the play mode.
+  // Conditional rendering, check whether is in the play page.
+  const isPlayMode = useLocation().pathname.includes('play')
   if (isPlayMode) {
     return (
       <div className='animal-card' ref={divRef}>
