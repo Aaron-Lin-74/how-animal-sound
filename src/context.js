@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
   // useRef does not trigger the re-render
   const randomPickAnimal = useRef('')
   const selectedAnimal = useRef(null)
+
   // make sure only one sound is in play
   const sound = useRef(null)
 
@@ -22,6 +23,9 @@ const AppProvider = ({ children }) => {
     const searchedAnimals = animals.filter((animal) =>
       animal.name.includes(searchTerm)
     )
+    if (searchedAnimals.length === 0) {
+      // TODO: show some result info
+    }
     setAnimals(searchedAnimals)
   }, [searchTerm])
 
@@ -30,12 +34,13 @@ const AppProvider = ({ children }) => {
     animalList.sort((animal1, animal2) => {
       if (animal1.name < animal2.name) {
         return -1
-      } else if (animal1.name > animal2.name) {
-        return 1
-      } else {
-        return 0
       }
+      if (animal1.name > animal2.name) {
+        return 1
+      }
+      return 0
     })
+
     // We need to use the spread operator to copy the array to trigger the rerender, otherwise, since the reference does not change, react would not rerender it!
     setAnimals([...animalList])
   }
@@ -45,11 +50,11 @@ const AppProvider = ({ children }) => {
     animalList.sort((animal1, animal2) => {
       if (animal1.name < animal2.name) {
         return 1
-      } else if (animal1.name > animal2.name) {
-        return -1
-      } else {
-        return 0
       }
+      if (animal1.name > animal2.name) {
+        return -1
+      }
+      return 0
     })
     setAnimals([...animalList])
   }
@@ -75,8 +80,10 @@ const AppProvider = ({ children }) => {
       window.confirm('Please press the play button first to start.')
       return
     }
+
     // stop the current sound
     sound.current.pause()
+
     // const guessAnimal = divRef.current.className.slice(11)
     selectedAnimal.current = name
     if (selectedAnimal.current === randomPickAnimal.current) {
@@ -90,8 +97,8 @@ const AppProvider = ({ children }) => {
       window.confirm(wrongText)
     }
   }
-  // In play mode, check the picked result is right or wrong
 
+  // In play mode, check the picked result is right or wrong
   return (
     <AppContext.Provider
       value={{
