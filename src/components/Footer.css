@@ -1,0 +1,124 @@
+.footer-container {
+  background-color: #242424;
+  padding: 30rem 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+  background-image: linear-gradient(rgba(92, 93, 96, 24%), rgba(0, 0, 0, 100%)),
+    url('../resources/images/footer_background_large.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.footer-subscription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.footer-subscription-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-subscription-text {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-input {
+  padding: 0.5rem 1.25rem;
+  border-radius: 2px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+}
+
+button.btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.footer-links {
+  border-top: 1px solid white;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-nav-items {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.footer-nav-items > a {
+  color: white;
+  text-decoration: none;
+}
+/* social icon */
+.social-icon-link {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.social-media {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.social-media-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1000px;
+  margin: 1rem auto 0 auto;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 15rem;
+}
+
+.website-rights {
+  color: white;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 720px) {
+  .footer-container {
+    padding: 1rem 0;
+  }
+  .footer-subscription {
+    padding-top: 10rem;
+  }
+  .footer-links {
+    padding-top: 2rem;
+  }
+  .footer-input {
+    width: 100%;
+  }
+  .btn {
+    width: 100%;
+  }
+  .social-media-wrapper {
+    flex-direction: column;
+  }
+}
