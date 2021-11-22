@@ -29,7 +29,7 @@ import horse_aud from './resources/audios/horse.mp3'
 import monkey_img from './resources/images/monkey.jpg'
 import monkey_aud from './resources/audios/monkey.mp3'
 
-export default [
+const data = [
   {
     id: 1,
     name: 'lion',
@@ -136,3 +136,5 @@ export default [
     link: 'https://en.wikipedia.org/wiki/Monkey',
   },
 ]
+
+export default data
