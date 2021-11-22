@@ -11,7 +11,7 @@ const Footer = () => {
           Join the How Animals Sounds newsletter to receive our latest updates
         </h3>
         <p className='footer-subscription-text'>
-          You can unsubscript at any time.
+          You can unsubscribe at any time.
         </p>
         <div className='input-areas'>
           <form>
@@ -22,7 +22,9 @@ const Footer = () => {
               placeholder='Your Email'
               required
             />
-            <button className='btn'>Subscribe</button>
+            <button type='submit' className='btn'>
+              Subscribe
+            </button>
           </form>
         </div>
       </section>
