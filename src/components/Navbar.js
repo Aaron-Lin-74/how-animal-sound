@@ -1,31 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
+import './Navbar.css'
 import logo from '../logo.svg'
-import { FcMenu } from 'react-icons/fc'
+import { FcMenu, FcPrevious } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
+  const [click, setClick] = useState(false)
+  const toggleMenu = () => setClick(!click)
+  const closeMobileMenu = () => setClick(false)
   return (
     <nav className='navbar'>
       <div className='nav-center'>
         <div className='nav-header'>
-          <img src={logo} alt='logo' className='logo' />
-          <button className='nav-toggle'>
-            <FcMenu />
+          <img
+            src={logo}
+            alt='logo'
+            className='logo'
+            onClick={closeMobileMenu}
+          />
+          <button className={'nav-toggle'} onClick={toggleMenu}>
+            {click ? <FcPrevious /> : <FcMenu />}
           </button>
         </div>
 
-        <div className='nav-links'>
-          <ul className='links'>
-            <li>
-              <Link to='/'>Home</Link>
-            </li>
-            <li>
-              <Link to='/play'>Play</Link>
-            </li>
-            <li>
-              <Link to='/about'>About</Link>
-            </li>
-          </ul>
-        </div>
+        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          <li className='nav-links' onClick={closeMobileMenu}>
+            <Link to='/'>Home</Link>
+          </li>
+          <li className='nav-links' onClick={closeMobileMenu}>
+            <Link to='/play'>Play</Link>
+          </li>
+          <li className='nav-links' onClick={closeMobileMenu}>
+            <Link to='/about'>About</Link>
+          </li>
+          <li className='nav-links' onClick={closeMobileMenu}>
+            <Link to='/contactus'>Contact Us</Link>
+          </li>
+        </ul>
       </div>
     </nav>
   )

@@ -25,33 +25,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: rgba(248, 246, 246, 0.8);
 }
-/* 
-====== 
-Navbar
-======
-*/
-.navbar {
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid black;
-  box-shadow: var(--lightShadow);
-}
-.nav-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: var(--smallWidth);
-  margin: 0 auto;
-  max-width: var(--fullWidth);
-}
-.logo {
-  width: 12rem;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-}
 
 /* 
 ====== 
