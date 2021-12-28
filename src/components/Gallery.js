@@ -4,6 +4,7 @@ import AnimalCard from './AnimalCard'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
+  FcProcess,
 } from 'react-icons/fc'
 
 const Gallery = () => {
@@ -11,15 +12,20 @@ const Gallery = () => {
     useGlobalContext()
   return (
     <div className='gallery-container'>
-      <button onClick={sortAnimals}>
-        <FcAlphabeticalSortingAz />
-        Sort A-Z{' '}
-      </button>
-      <button onClick={sortAnimalsDesc}>
-        <FcAlphabeticalSortingZa />
-        Sort Z-A{' '}
-      </button>
-      <button onClick={shuffleAnimals}>Shuffle</button>
+      <div className='btns-container'>
+        <button className='utl-btns' onClick={sortAnimals}>
+          <FcAlphabeticalSortingAz />
+          Sort A-Z{' '}
+        </button>
+        <button className='utl-btns' onClick={sortAnimalsDesc}>
+          <FcAlphabeticalSortingZa />
+          Sort Z-A{' '}
+        </button>
+        <button className='utl-btns' onClick={shuffleAnimals}>
+          <FcProcess />
+          Shuffle
+        </button>
+      </div>
       <div className='card-grid'>
         {animals.map((animal) => {
           return (
