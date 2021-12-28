@@ -5,7 +5,7 @@ Variables
 */
 :root {
   --maxWidth: 40rem;
-  --smallWidth: 85vw;
+  --smallWidth: 320px;
   --fullWidth: 1080px;
   --lightShadow: rgba(165, 158, 158, 0.8) 0px 0.15rem 0.5rem;
   --mainBorderRadius: 0.25rem;
@@ -26,6 +26,9 @@ body {
   background: rgba(248, 246, 246, 0.8);
 }
 
+a:hover {
+  transform: scale(1.1);
+}
 /* 
 ====== 
 Form
@@ -38,9 +41,8 @@ Form
 }
 
 .search-form {
-  width: var(--smallWidth);
+  width: clamp(var(--smallWidth), 50vw, var(--maxWidth));
   margin: 0 auto;
-  max-width: var(--maxWidth);
   background: var(--backgroundColor);
   padding: 2.5rem 2.5rem;
   text-transform: capitalize;
@@ -68,6 +70,27 @@ Form
 Gallery
 ======
 */
+.btns-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--backgroundColor);
+}
+.utl-btns {
+  padding: 12px;
+  font-size: 1.5rem;
+  background: var(--backgroundColor);
+  color: #fff;
+  width: 150px;
+  height: 100px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.utl-btns:hover {
+  background: rgb(19, 19, 19);
+}
 .gallery-container {
   position: relative;
   top: 15vh;
