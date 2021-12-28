@@ -5,8 +5,8 @@ const Playbar = () => {
   const playButtonRef = useRef(null)
   const { playRandomSound } = useGlobalContext()
   return (
-    <div>
-      <h4>which animal did you hear?</h4>
+    <div className='play-bar'>
+      <h2>Which animal did you hear?</h2>
       <button ref={playButtonRef} onClick={playRandomSound}>
         Play
       </button>
