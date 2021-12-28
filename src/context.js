@@ -13,6 +13,9 @@ const AppProvider = ({ children }) => {
   // make sure only one sound is in play
   const sound = useRef(null)
 
+  // gallery animal card mini mode
+  const [showMini, setShowMini] = useState(false)
+
   // Load the data from data.js, could implement API fetch in the future
   useEffect(() => {
     setAnimals(animalList)
@@ -74,6 +77,11 @@ const AppProvider = ({ children }) => {
     sound.current.play()
   }
 
+  // Toggle the gallery animal card mode
+  const toggleMini = () => {
+    setShowMini(!showMini)
+  }
+
   const checkResult = (name) => {
     // need to start the play first
     if (randomPickAnimal.current === '') {
@@ -103,12 +111,14 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         animals,
+        showMini,
         setSearchTerm,
         sortAnimals,
         sortAnimalsDesc,
         shuffleAnimals,
         playRandomSound,
         checkResult,
+        toggleMini,
       }}
     >
       {children}

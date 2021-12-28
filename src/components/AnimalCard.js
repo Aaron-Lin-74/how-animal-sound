@@ -3,7 +3,7 @@ import { useGlobalContext } from '../context'
 import { useLocation } from 'react-router-dom'
 
 const AnimalCard = ({ name, image, audio, link }) => {
-  const { checkResult } = useGlobalContext()
+  const { checkResult, showMini } = useGlobalContext()
   const sound = new Audio(audio)
   const toggleSound = () => {
     if (sound.paused) {
@@ -25,17 +25,22 @@ const AnimalCard = ({ name, image, audio, link }) => {
   const isPlayMode = useLocation().pathname.includes('play')
   if (isPlayMode) {
     return (
-      <div className='animal-card' ref={divRef}>
-        <div className='animal-card-font'>
-          <img
-            className='animal-img'
-            src={image}
-            alt={`This is ${name}`}
-            onClick={() => checkResult(name)}
-          />
-        </div>
-        <div className='animal-card-back'>
-          <p> {name}</p>
+      <div
+        className='animal-card'
+        ref={divRef}
+        onClick={() => checkResult(name)}
+      >
+        <div className='animal-card-inner'>
+          <div className='animal-card-font'>
+            <img
+              className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
+              src={image}
+              alt={`This is ${name}`}
+            />
+          </div>
+          <div className='animal-card-back'>
+            <p> {name}</p>
+          </div>
         </div>
       </div>
     )
@@ -43,7 +48,7 @@ const AnimalCard = ({ name, image, audio, link }) => {
     return (
       <div className={`animal-card ${name}`}>
         <img
-          className='animal-img'
+          className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
           src={image}
           alt={`${name} is making sound`}
           onClick={toggleSound}
@@ -53,7 +58,12 @@ const AnimalCard = ({ name, image, audio, link }) => {
         <div className='animal-card-footer'>
           {/* <h4 className='animal-name-capitalize'>{name}</h4> */}
           <p>
-            <a className='animal-link' href={link} target='_blank'>
+            <a
+              className='animal-link'
+              href={link}
+              target='_blank'
+              rel='noreferrer'
+            >
               Learn more about {name}
             </a>
           </p>

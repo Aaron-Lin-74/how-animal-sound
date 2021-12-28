@@ -72,7 +72,7 @@ Gallery
 */
 .btns-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background: var(--backgroundColor);
 }
@@ -87,18 +87,21 @@ Gallery
   display: flex;
   justify-content: center;
   align-items: center;
+  outline: none;
+  border: none;
 }
 .utl-btns:hover {
   background: rgb(19, 19, 19);
 }
 .gallery-container {
   position: relative;
-  top: 15vh;
+  margin-top: 100px;
   /* display: flex;
   justify-content: center;
   align-items: center; */
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 0 2rem;
+  min-height: 100vh;
+  background: var(--backgroundColor);
 }
 .card-grid {
   display: grid;
@@ -108,6 +111,13 @@ Gallery
   background: rgb(19, 19, 19);
   color: #fff;
   padding: 2rem;
+}
+.card-grid-mini {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-auto-rows: 150px;
+  justify-content: center;
 }
 .animal-card-container {
   /* padding: 1em; */
@@ -126,6 +136,7 @@ Gallery
   border-radius: var(--mainBorderRadius);
   transition: all 500ms;
   overflow: hidden;
+  position: relative;
 
   animation: cardEntrance 1s ease-in;
   animation-fill-mode: backwards;
@@ -147,22 +158,51 @@ Gallery
     transform: scale(1);
   }
 }
-/* .animal-card-font .animal-card-back {
-  backface-visibility: hidden;
-  transition: 2s linear;
+.animal-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
-.animal-card-font:hover {
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.animal-card:hover .animal-card-inner {
   transform: rotateY(180deg);
 }
+.animal-card-font,
+.animal-card-back {
+  backface-visibility: hidden;
+  transition: 1s linear;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
 .animal-card-back {
   transform: rotateY(180deg);
-} */
-.animal-card img {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animal-card-back p {
+  text-transform: capitalize;
+  font-size: 2rem;
+}
+.animal-img {
   min-height: 240px;
   max-width: 300px;
   object-fit: cover;
 }
 
+.animal-img-mini {
+  min-height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
 .animal-card-footer {
   display: flex;
   flex-direction: column;
@@ -178,4 +218,34 @@ Gallery
   color: #fff;
   text-decoration: none;
   text-transform: capitalize;
+}
+
+.play-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+  width: 50%;
+  margin: 4rem auto 0;
+  background: var(--backgroundColor);
+  color: #fff;
+  box-shadow: var(--lightShadow);
+  border-radius: var(--mainBorderRadius);
+}
+.play-bar button {
+  padding: 10px;
+  width: 100px;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+@media screen and (max-width: 760px) {
+  .gallery-container {
+    padding: 0;
+  }
+  .card-grid {
+    padding: 1rem 0;
+  }
+  .utl-btns {
+    font-size: 1rem;
+  }
 }
