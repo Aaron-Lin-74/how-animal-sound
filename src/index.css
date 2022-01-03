@@ -23,7 +23,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgba(248, 246, 246, 0.8);
+  color: #fff;
+  background: #040714;
 }
 
 a:hover {

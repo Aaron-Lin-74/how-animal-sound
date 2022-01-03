@@ -5,6 +5,7 @@ import Play from './pages/Play'
 import Error from './pages/Error'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Search from './pages/Search'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path='/about'>
             <About />
+          </Route>
+          <Route path='/search'>
+            <Search />
           </Route>
           <Route path='*'>
             <Error />
