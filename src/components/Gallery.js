@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
 import AnimalCard from './AnimalCard'
+import Card from './Card'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
@@ -16,6 +17,7 @@ const Gallery = () => {
     shuffleAnimals,
     showMini,
     toggleMini,
+    loading,
   } = useGlobalContext()
 
   return (
@@ -39,18 +41,25 @@ const Gallery = () => {
         </button>
       </div>
       <div className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
-        {animals.map((animal) => {
-          return (
-            <AnimalCard
-              // Adding a changing key will make react think it's a different component when the key changes, so it'll unmount it and mount again.
-              key={Math.random()}
-              name={animal.name}
-              image={animal.image}
-              audio={animal.audio}
-              link={animal.link}
-            />
-          )
-        })}
+        {loading ? (
+          <img
+            className='loading'
+            src='https://www.google.com/images/spin-32.gif?a'
+            alt='loading'
+          />
+        ) : (
+          animals.map((animal) => {
+            return (
+              <Card
+                key={animal.id}
+                name={animal.name}
+                imageURL={animal.imageURL}
+                audioURL={animal.audioURL}
+                link={animal.link}
+              />
+            )
+          })
+        )}
       </div>
     </div>
   )

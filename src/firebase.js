@@ -17,12 +17,12 @@ import {
   collection,
   orderBy,
   limit,
-  getDocs,
   where,
   updateDoc,
+  addDoc,
   onSnapshot,
+  getDocs,
 } from 'firebase/firestore'
-
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -55,18 +55,26 @@ const signOutUser = () => {
 }
 
 // Returns true if a user is signed-in.
-const isUserSignedIn = () => {
+const hasUserSignedIn = () => {
   return !!auth.currentUser
 }
-
+const animalQuery = query(
+  animalsRef,
+  where('type', '==', 'bird'),
+  orderBy('name', 'desc'),
+  limit(10)
+)
 export {
   auth,
   db,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithGoogle,
-  isUserSignedIn,
+  hasUserSignedIn,
   signOutUser,
+  addDoc,
+  getDocs,
+  animalQuery,
   animalsRef,
   onSnapshot,
   updateProfile,
@@ -81,3 +89,20 @@ export function useAuth() {
   }, [])
   return currentUser
 }
+
+// export function useLoadAnimals() {
+//   const [animals, setAnimals] = useState([])
+
+//   useEffect(() => {
+//     const loadAnimals = async () => {
+//       const querySnapshot = await getDocs(animalQuery)
+//       const result = []
+//       querySnapshot.forEach((doc) => {
+//         result.push(doc.data())
+//       })
+//       setAnimals(result)
+//     }
+//     loadAnimals()
+//   }, [animalQuery])
+//   return animals
+// }

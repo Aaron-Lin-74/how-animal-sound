@@ -1,9 +1,39 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
-import animalList from './data'
-
+import { animalsRef, getDocs } from './firebase'
+import { query, orderBy, limit, where } from 'firebase/firestore'
 const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
-  const [animals, setAnimals] = useState(animalList)
+  const [animals, setAnimals] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [type, setType] = useState('')
+  let animalList
+
+  useEffect(() => {
+    const loadAnimals = async (animalQuery) => {
+      setLoading(true)
+      try {
+        const querySnapshot = await getDocs(animalQuery)
+        const result = []
+        querySnapshot.forEach((doc) => {
+          result.push(doc.data())
+        })
+        setAnimals(result)
+        animalList = result
+        setLoading(false)
+      } catch (err) {
+        console.log(err)
+        setLoading(false)
+      }
+    }
+    const animalQuery = query(
+      animalsRef,
+      where('type', '==', type),
+      orderBy('name', 'desc'),
+      limit(10)
+    )
+    loadAnimals(animalQuery)
+  }, [type])
+
   const [searchTerm, setSearchTerm] = useState('')
 
   // useRef does not trigger the re-render
@@ -16,10 +46,10 @@ const AppProvider = ({ children }) => {
   // gallery animal card mini mode
   const [showMini, setShowMini] = useState(false)
 
-  // Load the data from data.js, could implement API fetch in the future
-  useEffect(() => {
-    setAnimals(animalList)
-  }, [])
+  // // Load the data from data.js, could implement API fetch in the future
+  // useEffect(() => {
+  //   setAnimals(animalList)
+  // }, [])
 
   //  Use the filter to implement the search function
   useEffect(() => {
@@ -119,6 +149,8 @@ const AppProvider = ({ children }) => {
         playRandomSound,
         checkResult,
         toggleMini,
+        loading,
+        setType,
       }}
     >
       {children}

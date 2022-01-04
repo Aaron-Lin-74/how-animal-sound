@@ -1,22 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useGlobalContext } from '../context'
 
 function Viewers() {
+  const { setType } = useGlobalContext()
   return (
     <Container>
-      <Wrap>
+      <Wrap onClick={() => setType('mammal')}>
         <img src='/images/mammal.png' alt='mammal' animal-type='mammal' />
       </Wrap>
-      <Wrap>
+      <Wrap onClick={() => setType('bird')}>
         <img src='/images/bird.png' alt='bird' />
       </Wrap>
-      <Wrap>
+      <Wrap onClick={() => setType('amphibian')}>
         <img src='/images/amphibian.png' alt='amphibian' />
       </Wrap>
-      <Wrap>
+      <Wrap onClick={() => setType('reptile')}>
         <img src='/images/reptile.png' alt='reptile' />
       </Wrap>
-      <Wrap>
+      <Wrap onClick={() => setType('insect')}>
         <img src='/images/insect.png' alt='insect' />
       </Wrap>
     </Container>
