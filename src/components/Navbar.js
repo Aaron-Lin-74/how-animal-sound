@@ -7,16 +7,14 @@ import {
   AiFillPlaySquare,
   AiFillInfoCircle,
   AiFillContacts,
-  AiOutlineSearch,
 } from 'react-icons/ai'
 import { RiSearchFill } from 'react-icons/ri'
-import { auth, signInWithGoogle } from '../firebase'
+import { auth, hasUserSignedIn } from '../firebase'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
   const [click, setClick] = useState(false)
   const toggleMenu = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
-  const signin = () => {}
   return (
     <nav className='navbar'>
       <div className='nav-center'>
@@ -63,6 +61,22 @@ const Navbar = () => {
               <RiSearchFill />
               Search
             </Link>
+          </li>
+
+          <li className='nav-links' onClick={closeMobileMenu}>
+            {hasUserSignedIn() ? (
+              <Link to='/dashboard'>
+                <div className='wrap'>
+                  <img
+                    className='profile'
+                    src={auth.currentUser.photoURL}
+                    alt='user-profile'
+                  />
+                </div>
+              </Link>
+            ) : (
+              <Link to='/login'>Login</Link>
+            )}
           </li>
         </ul>
       </div>
