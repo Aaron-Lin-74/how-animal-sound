@@ -2,12 +2,14 @@ import React from 'react'
 import Gallery from '../components/Gallery'
 import Viewers from '../components/Viewers'
 import styled from 'styled-components'
+import Subscription from '../components/Subscription'
 
 const Home = () => {
   return (
     <Container>
       <Viewers />
       <Gallery />
+      <Subscription />
     </Container>
   )
 }

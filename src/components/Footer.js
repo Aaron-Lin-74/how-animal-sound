@@ -6,28 +6,6 @@ import './Footer.css'
 const Footer = () => {
   return (
     <div className='footer-container'>
-      <section className='footer-subscription'>
-        <h3 className='footer-subscription-heading'>
-          Join the How Animals Sounds newsletter to receive our latest updates
-        </h3>
-        <p className='footer-subscription-text'>
-          You can unsubscribe at any time.
-        </p>
-        <div className='input-areas'>
-          <form>
-            <input
-              type='email'
-              name='email'
-              className='footer-input'
-              placeholder='Your Email'
-              required
-            />
-            <button type='submit' className='btn'>
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
       <section className='footer-links'>
         <div className='footer-nav-items'>
           <Link to='/'>Contact</Link>

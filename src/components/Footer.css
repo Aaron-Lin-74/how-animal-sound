@@ -1,56 +1,9 @@
 .footer-container {
   background-color: #242424;
-  padding: 30rem 0 1.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
-  background-image: linear-gradient(rgba(92, 93, 96, 24%), rgba(0, 0, 0, 100%)),
-    url('../resources/images/footer_background_large.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.footer-subscription {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-  margin-bottom: 1.5rem;
-  padding: 1.5rem;
-}
-
-.footer-subscription-heading {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.footer-subscription-text {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-.footer-input {
-  padding: 0.5rem 1.25rem;
-  border-radius: 2px;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  outline: none;
-  border: none;
-  font-size: 1rem;
-}
-
-button.btn {
-  padding: 0.5rem 1.25rem;
-  border-radius: 50px;
-  outline: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
 }
 
 .footer-links {

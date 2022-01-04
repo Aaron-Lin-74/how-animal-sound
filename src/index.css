@@ -4,9 +4,7 @@ Variables
 ======
 */
 :root {
-  --maxWidth: 40rem;
   --smallWidth: 320px;
-  --fullWidth: 1080px;
   --lightShadow: rgba(165, 158, 158, 0.8) 0px 0.15rem 0.5rem;
   --mainBorderRadius: 0.25rem;
   --backgroundColor: #353535;
