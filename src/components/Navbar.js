@@ -9,12 +9,13 @@ import {
   AiFillContacts,
 } from 'react-icons/ai'
 import { RiSearchFill } from 'react-icons/ri'
-import { auth, hasUserSignedIn } from '../firebase'
+import { useAuth, signOutUser } from '../firebase'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
   const [click, setClick] = useState(false)
   const toggleMenu = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
+  const currentUser = useAuth()
   return (
     <nav className='navbar'>
       <div className='nav-center'>
@@ -63,16 +64,23 @@ const Navbar = () => {
             </Link>
           </li>
 
-          <li className='nav-links' onClick={closeMobileMenu}>
-            {hasUserSignedIn() ? (
+          {currentUser && (
+            <li className='nav-links' onClick={closeMobileMenu}>
               <Link to='/dashboard'>
                 <div className='wrap'>
                   <img
                     className='profile'
-                    src={auth.currentUser.photoURL}
+                    src={currentUser.photoURL}
                     alt='user-profile'
                   />
                 </div>
+              </Link>
+            </li>
+          )}
+          <li className='nav-links' onClick={closeMobileMenu}>
+            {currentUser ? (
+              <Link to='/' onClick={signOutUser}>
+                Logout
               </Link>
             ) : (
               <Link to='/login'>Login</Link>
