@@ -24,28 +24,28 @@ const Gallery = () => {
   return (
     <GalleryContainer>
       <BtnsContainer>
-        <Button onClick={sortAnimals}>
+        <button onClick={sortAnimals}>
           <FcAlphabeticalSortingAz />
           Sort A-Z{' '}
-        </Button>
-        <Button onClick={sortAnimalsDesc}>
+        </button>
+        <button onClick={sortAnimalsDesc}>
           <FcAlphabeticalSortingZa />
           Sort Z-A{' '}
-        </Button>
-        <Button onClick={shuffleAnimals}>
+        </button>
+        <button onClick={shuffleAnimals}>
           <FcProcess />
           Shuffle
-        </Button>
-        <Button onClick={toggleMini}>
+        </button>
+        <button onClick={toggleMini}>
           <FcGrid />
           {showMini ? 'Normal' : 'Mini'}
-        </Button>
+        </button>
       </BtnsContainer>
       <div className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
         {loading ? (
           <Loading>
             <ImgContainer>
-              <Image src={load} alt='loading...' />
+              <img src={load} alt='loading...' />
             </ImgContainer>
           </Loading>
         ) : (
@@ -77,30 +77,38 @@ const GalleryContainer = styled.div`
   padding: 0 2rem;
   min-height: 100vh;
   background: var(--backgroundColor);
+
+  @media (max-width: 760px) {
+    padding: 0;
+  }
 `
 const BtnsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--backgroundColor);
-`
 
-const Button = styled.button`
-  padding: 12px;
-  font-size: 1.5rem;
-  background: var(--backgroundColor);
-  color: #fff;
-  width: 150px;
-  height: 100px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: none;
-  border: none;
+  button {
+    padding: 12px;
+    font-size: 1.5rem;
+    background: var(--backgroundColor);
+    color: #fff;
+    width: 150px;
+    height: 100px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
 
-  &:hover {
-    background: rgb(19, 19, 19);
+    &:hover {
+      background: rgb(19, 19, 19);
+    }
+
+    @media (max-width: 760px) {
+      font-size: 1rem;
+    }
   }
 `
 const Loading = styled.div`
@@ -120,8 +128,10 @@ const Loading = styled.div`
 const ImgContainer = styled.div`
   width: 40vw;
   max-width: 300px;
-`
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `
