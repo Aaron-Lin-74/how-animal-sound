@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import { animalsRef, getDocs } from './firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
+
 const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [animals, setAnimals] = useState([])
   const [loading, setLoading] = useState(false)
   const [type, setType] = useState('')
-  let animalList
+  const animalList = useRef()
 
   useEffect(() => {
     const loadAnimals = async (animalQuery) => {
@@ -18,20 +19,22 @@ const AppProvider = ({ children }) => {
           result.push(doc.data())
         })
         setAnimals(result)
-        animalList = result
+        animalList.current = result
         setLoading(false)
       } catch (err) {
         console.log(err)
         setLoading(false)
       }
     }
-    const animalQuery = query(
+    const animalQuery = query(animalsRef, orderBy('name', 'desc'), limit(100))
+    const animalQueryByType = query(
       animalsRef,
       where('type', '==', type),
       orderBy('name', 'desc'),
-      limit(10)
+      limit(16)
     )
-    loadAnimals(animalQuery)
+    let q = type === '' ? animalQuery : animalQueryByType
+    loadAnimals(q)
   }, [type])
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -64,7 +67,7 @@ const AppProvider = ({ children }) => {
 
   // Sort the animals by name A-Z, be aware, no copy is made!
   const sortAnimals = () => {
-    animalList.sort((animal1, animal2) => {
+    animalList.current.sort((animal1, animal2) => {
       if (animal1.name < animal2.name) {
         return -1
       }
@@ -75,12 +78,12 @@ const AppProvider = ({ children }) => {
     })
 
     // We need to use the spread operator to copy the array to trigger the rerender, otherwise, since the reference does not change, react would not rerender it!
-    setAnimals([...animalList])
+    setAnimals([...animalList.current])
   }
 
   // Sort the animals by name in descent order Z-A
   const sortAnimalsDesc = () => {
-    animalList.sort((animal1, animal2) => {
+    animalList.current.sort((animal1, animal2) => {
       if (animal1.name < animal2.name) {
         return 1
       }
@@ -89,14 +92,14 @@ const AppProvider = ({ children }) => {
       }
       return 0
     })
-    setAnimals([...animalList])
+    setAnimals([...animalList.current])
   }
 
   const shuffleAnimals = () => {
-    animalList.sort((animal1, animal2) => {
+    animalList.current.sort((animal1, animal2) => {
       return 0.5 - Math.random()
     })
-    setAnimals([...animalList])
+    setAnimals([...animalList.current])
   }
 
   // In play mode, play a random animal sound to begin the play.
