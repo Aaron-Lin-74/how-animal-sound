@@ -64,44 +64,7 @@ Form
   padding: 0.5rem;
   font-size: 1.2rem;
 }
-/* 
-====== 
-Gallery
-======
-*/
-.btns-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--backgroundColor);
-}
-.utl-btns {
-  padding: 12px;
-  font-size: 1.5rem;
-  background: var(--backgroundColor);
-  color: #fff;
-  width: 150px;
-  height: 100px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: none;
-  border: none;
-}
-.utl-btns:hover {
-  background: rgb(19, 19, 19);
-}
-.gallery-container {
-  position: relative;
-  margin-top: 100px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  padding: 0 2rem;
-  min-height: 100vh;
-  background: var(--backgroundColor);
-}
+
 .card-grid {
   display: grid;
   gap: 1rem;
@@ -238,13 +201,7 @@ Gallery
   font-size: 1rem;
 }
 @media screen and (max-width: 760px) {
-  .gallery-container {
-    padding: 0;
-  }
   .card-grid {
     padding: 1rem 0;
-  }
-  .utl-btns {
-    font-size: 1rem;
   }
 }
