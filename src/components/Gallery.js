@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
 import styled from 'styled-components'
 import load from '../resources/gifs/loading2.gif'
@@ -11,15 +11,16 @@ import {
 } from 'react-icons/fc'
 
 const Gallery = () => {
-  const {
-    animals,
-    sortAnimals,
-    sortAnimalsDesc,
-    shuffleAnimals,
-    showMini,
-    toggleMini,
-    loading,
-  } = useGlobalContext()
+  const { animals, sortAnimals, sortAnimalsDesc, shuffleAnimals, loading } =
+    useGlobalContext()
+
+  // Local state for gallery animal card mini mode
+  const [showMini, setShowMini] = useState(false)
+
+  // Toggle the gallery animal card mode
+  const toggleMini = () => {
+    setShowMini(!showMini)
+  }
 
   return (
     <GalleryContainer>
@@ -57,6 +58,7 @@ const Gallery = () => {
                 imageURL={animal.imageURL}
                 audioURL={animal.audioURL}
                 link={animal.link}
+                showMini={showMini}
               />
             )
           })
