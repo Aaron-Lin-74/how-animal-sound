@@ -1,43 +1,41 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useReducer } from 'react'
 import { animalsRef, getDocs } from './firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
 
 const AppContext = React.createContext()
+
+const initialState = {
+  animals: [],
+  loading: false,
+  animalType: '',
+  searchTerm: '',
+}
+
+// Avoid hardcoded action strings, to reduce the bugs
+const ACTIONS = {
+  SET_ANIMALS: 'SET_ANIMALS',
+  SET_LOADING: 'SET_LOADING',
+  SET_SEARCHTERM: 'SET_SEARCHTERM',
+  SET_ANIMALTYPE: 'SET_ANIMALTYPE',
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.SET_ANIMALS:
+      return { ...state, animals: action.payload.animals }
+    case ACTIONS.SET_LOADING:
+      return { ...state, loading: action.payload.loading }
+    case ACTIONS.SET_SEARCHTERM:
+      return { ...state, searchTerm: action.payload.searchTerm }
+    case ACTIONS.SET_ANIMALTYPE:
+      return { ...state, animalType: action.payload.animalType }
+    default:
+      return state
+  }
+}
 const AppProvider = ({ children }) => {
-  const [animals, setAnimals] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [type, setType] = useState('')
+  const [state, dispatch] = useReducer(reducer, initialState)
   const animalList = useRef()
-
-  useEffect(() => {
-    const loadAnimals = async (animalQuery) => {
-      setLoading(true)
-      try {
-        const querySnapshot = await getDocs(animalQuery)
-        const result = []
-        querySnapshot.forEach((doc) => {
-          result.push(doc.data())
-        })
-        setAnimals(result)
-        animalList.current = result
-        setLoading(false)
-      } catch (err) {
-        console.log(err)
-        setLoading(false)
-      }
-    }
-    const animalQuery = query(animalsRef, orderBy('name', 'desc'), limit(100))
-    const animalQueryByType = query(
-      animalsRef,
-      where('type', '==', type),
-      orderBy('name', 'desc'),
-      limit(16)
-    )
-    let q = type === '' ? animalQuery : animalQueryByType
-    loadAnimals(q)
-  }, [type])
-
-  const [searchTerm, setSearchTerm] = useState('')
 
   // useRef does not trigger the re-render
   const randomPickAnimal = useRef('')
@@ -45,25 +43,49 @@ const AppProvider = ({ children }) => {
 
   // make sure only one sound is in play
   const sound = useRef(null)
-
-  // gallery animal card mini mode
-  const [showMini, setShowMini] = useState(false)
-
-  // // Load the data from data.js, could implement API fetch in the future
-  // useEffect(() => {
-  //   setAnimals(animalList)
-  // }, [])
+  useEffect(() => {
+    const loadAnimals = async (animalQuery) => {
+      dispatch({ type: ACTIONS.SET_LOADING, payload: { loading: true } })
+      try {
+        const querySnapshot = await getDocs(animalQuery)
+        const result = []
+        querySnapshot.forEach((doc) => {
+          result.push(doc.data())
+        })
+        dispatch({ type: ACTIONS.SET_ANIMALS, payload: { animals: result } })
+        animalList.current = result
+        dispatch({ type: ACTIONS.SET_LOADING, payload: { loading: false } })
+      } catch (err) {
+        console.log(err)
+        dispatch({ type: ACTIONS.SET_LOADING, payload: { loading: false } })
+      }
+    }
+    const animalQuery = query(animalsRef, orderBy('name', 'desc'), limit(100))
+    const animalQueryByType = query(
+      animalsRef,
+      where('type', '==', state.animalType),
+      orderBy('name', 'desc'),
+      limit(16)
+    )
+    let q = state.animalType === '' ? animalQuery : animalQueryByType
+    loadAnimals(q)
+  }, [state.animalType])
 
   //  Use the filter to implement the search function
   useEffect(() => {
-    const searchedAnimals = animals.filter((animal) =>
-      animal.name.includes(searchTerm)
-    )
-    if (searchedAnimals.length === 0) {
-      // TODO: show some result info
+    if (animalList.current) {
+      let searchedAnimals = animalList.current.filter((animal) =>
+        animal.name.toLowerCase().includes(state.searchTerm.toLowerCase())
+      )
+      if (state.searchTerm.length === 0) {
+        searchedAnimals = animalList.current
+      }
+      dispatch({
+        type: ACTIONS.SET_ANIMALS,
+        payload: { animals: searchedAnimals },
+      })
     }
-    setAnimals(searchedAnimals)
-  }, [searchTerm])
+  }, [state.searchTerm])
 
   // Sort the animals by name A-Z, be aware, no copy is made!
   const sortAnimals = () => {
@@ -78,7 +100,10 @@ const AppProvider = ({ children }) => {
     })
 
     // We need to use the spread operator to copy the array to trigger the rerender, otherwise, since the reference does not change, react would not rerender it!
-    setAnimals([...animalList.current])
+    dispatch({
+      type: ACTIONS.SET_ANIMALS,
+      payload: { animals: [...animalList.current] },
+    })
   }
 
   // Sort the animals by name in descent order Z-A
@@ -92,27 +117,28 @@ const AppProvider = ({ children }) => {
       }
       return 0
     })
-    setAnimals([...animalList.current])
+    dispatch({
+      type: ACTIONS.SET_ANIMALS,
+      payload: { animals: [...animalList.current] },
+    })
   }
 
   const shuffleAnimals = () => {
     animalList.current.sort((animal1, animal2) => {
       return 0.5 - Math.random()
     })
-    setAnimals([...animalList.current])
+    dispatch({
+      type: ACTIONS.SET_ANIMALS,
+      payload: { animals: [...animalList.current] },
+    })
   }
 
   // In play mode, play a random animal sound to begin the play.
   const playRandomSound = () => {
-    const randomPickNum = Math.floor(animals.length * Math.random())
-    randomPickAnimal.current = animals[randomPickNum].name
-    sound.current = new Audio(animals[randomPickNum].audio)
+    const randomPickNum = Math.floor(state.animals.length * Math.random())
+    randomPickAnimal.current = state.animals[randomPickNum].name
+    sound.current = new Audio(state.animals[randomPickNum].audio)
     sound.current.play()
-  }
-
-  // Toggle the gallery animal card mode
-  const toggleMini = () => {
-    setShowMini(!showMini)
   }
 
   const checkResult = (name) => {
@@ -143,17 +169,17 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        animals,
-        showMini,
-        setSearchTerm,
+        animals: state.animals,
+        setSearchTerm: (searchTerm) =>
+          dispatch({ type: ACTIONS.SET_SEARCHTERM, payload: { searchTerm } }),
         sortAnimals,
         sortAnimalsDesc,
         shuffleAnimals,
         playRandomSound,
         checkResult,
-        toggleMini,
-        loading,
-        setType,
+        loading: state.loading,
+        setAnimalType: (animalType) =>
+          dispatch({ type: ACTIONS.SET_ANIMALTYPE, payload: { animalType } }),
       }}
     >
       {children}

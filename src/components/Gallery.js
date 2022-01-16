@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
 import styled from 'styled-components'
 import load from '../resources/gifs/loading2.gif'
@@ -11,34 +11,35 @@ import {
 } from 'react-icons/fc'
 
 const Gallery = () => {
-  const {
-    animals,
-    sortAnimals,
-    sortAnimalsDesc,
-    shuffleAnimals,
-    showMini,
-    toggleMini,
-    loading,
-  } = useGlobalContext()
+  const { animals, sortAnimals, sortAnimalsDesc, shuffleAnimals, loading } =
+    useGlobalContext()
+
+  // Local state for gallery animal card mini mode
+  const [showMini, setShowMini] = useState(false)
+
+  // Toggle the gallery animal card mode
+  const toggleMini = () => {
+    setShowMini(!showMini)
+  }
 
   return (
     <GalleryContainer>
       <BtnsContainer>
         <button onClick={sortAnimals}>
           <FcAlphabeticalSortingAz />
-          Sort A-Z{' '}
+          <span>Sort A-Z</span>
         </button>
         <button onClick={sortAnimalsDesc}>
           <FcAlphabeticalSortingZa />
-          Sort Z-A{' '}
+          <span>Sort Z-A</span>
         </button>
         <button onClick={shuffleAnimals}>
           <FcProcess />
-          Shuffle
+          <span>Shuffle</span>
         </button>
         <button onClick={toggleMini}>
           <FcGrid />
-          {showMini ? 'Normal' : 'Mini'}
+          <span>{showMini ? 'Normal' : 'Mini'}</span>
         </button>
       </BtnsContainer>
       <div className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
@@ -57,6 +58,7 @@ const Gallery = () => {
                 imageURL={animal.imageURL}
                 audioURL={animal.audioURL}
                 link={animal.link}
+                showMini={showMini}
               />
             )
           })
@@ -74,12 +76,14 @@ const GalleryContainer = styled.div`
   /* display: flex;
   justify-content: center;
   align-items: center; */
-  padding: 0 2rem;
+  padding: 0 2rem 1rem;
   min-height: 100vh;
+  min-width: 320px;
   background: var(--backgroundColor);
 
   @media (max-width: 760px) {
     padding: 0;
+    margin-top: 20px;
   }
 `
 const BtnsContainer = styled.div`
@@ -107,7 +111,10 @@ const BtnsContainer = styled.div`
     }
 
     @media (max-width: 760px) {
-      font-size: 1rem;
+      span {
+        font-size: 0.8rem;
+      }
+      height: 50px;
     }
   }
 `

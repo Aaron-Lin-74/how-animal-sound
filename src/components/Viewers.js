@@ -39,7 +39,9 @@ const Container = styled.div`
 
   @media (max-width: 480px) {
     min-width: 320px;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 5px;
+    margin-top: 5px;
   }
 `
 
