@@ -40,7 +40,7 @@ Form
 }
 
 .search-form {
-  width: clamp(var(--smallWidth), 50vw, var(--maxWidth));
+  width: clamp(var(--smallWidth), 50vw, 600px);
   margin: 0 auto;
   background: var(--backgroundColor);
   padding: 2.5rem 2.5rem;
@@ -99,7 +99,7 @@ Form
   transition: all 500ms;
   overflow: hidden;
   position: relative;
-
+  cursor: pointer;
   animation: cardEntrance 1s ease-in;
   animation-fill-mode: backwards;
 }
@@ -203,5 +203,15 @@ Form
 @media screen and (max-width: 760px) {
   .card-grid {
     padding: 1rem 0;
+  }
+  .search {
+    padding: 2rem 0;
+  }
+  .search-form {
+    padding: 1rem 0.5rem;
+  }
+  .play-bar {
+    width: 100%;
+    padding: 1rem;
   }
 }

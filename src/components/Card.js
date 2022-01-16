@@ -1,10 +1,6 @@
 import React from 'react'
-import { useGlobalContext } from '../context'
 
-import { getStorage, ref, getDownloadURL } from 'firebase/storage'
-
-function Card({ name, imageURL, audioURL, link }) {
-  const { showMini } = useGlobalContext()
+function Card({ name, imageURL, audioURL, link, showMini }) {
   let sound = new Audio(audioURL)
 
   const toggleSound = () => {
