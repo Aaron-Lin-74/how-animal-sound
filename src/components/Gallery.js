@@ -26,19 +26,19 @@ const Gallery = () => {
       <BtnsContainer>
         <button onClick={sortAnimals}>
           <FcAlphabeticalSortingAz />
-          Sort A-Z{' '}
+          <span>Sort A-Z</span>
         </button>
         <button onClick={sortAnimalsDesc}>
           <FcAlphabeticalSortingZa />
-          Sort Z-A{' '}
+          <span>Sort Z-A</span>
         </button>
         <button onClick={shuffleAnimals}>
           <FcProcess />
-          Shuffle
+          <span>Shuffle</span>
         </button>
         <button onClick={toggleMini}>
           <FcGrid />
-          {showMini ? 'Normal' : 'Mini'}
+          <span>{showMini ? 'Normal' : 'Mini'}</span>
         </button>
       </BtnsContainer>
       <div className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
@@ -74,12 +74,14 @@ const GalleryContainer = styled.div`
   /* display: flex;
   justify-content: center;
   align-items: center; */
-  padding: 0 2rem;
+  padding: 0 2rem 1rem;
   min-height: 100vh;
+  min-width: 320px;
   background: var(--backgroundColor);
 
   @media (max-width: 760px) {
     padding: 0;
+    margin-top: 20px;
   }
 `
 const BtnsContainer = styled.div`
@@ -107,7 +109,10 @@ const BtnsContainer = styled.div`
     }
 
     @media (max-width: 760px) {
-      font-size: 1rem;
+      span {
+        font-size: 0.8rem;
+      }
+      height: 50px;
     }
   }
 `
