@@ -182,7 +182,7 @@ Form
   text-transform: capitalize;
 }
 
-.play-bar {
+/* .play-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -198,8 +198,8 @@ Form
   padding: 10px;
   width: 100px;
   margin-top: 20px;
-  font-size: 1rem;
-}
+  font-size: 1rem; 
+}*/
 @media screen and (max-width: 760px) {
   .card-grid {
     padding: 1rem 0;
@@ -210,8 +210,8 @@ Form
   .search-form {
     padding: 1rem 0.5rem;
   }
-  .play-bar {
+  /* .play-bar {
     width: 100%;
     padding: 1rem;
-  }
+  } */
 }

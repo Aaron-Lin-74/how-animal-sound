@@ -1,17 +1,44 @@
 import React, { useRef } from 'react'
 import { useGlobalContext } from '../context'
+import styled from 'styled-components'
 
 const Playbar = () => {
   const playButtonRef = useRef(null)
   const { playRandomSound } = useGlobalContext()
   return (
-    <div className='play-bar'>
+    <Container>
       <h2>Which animal did you hear?</h2>
       <button ref={playButtonRef} onClick={playRandomSound}>
         Play
       </button>
-    </div>
+    </Container>
   )
 }
 
 export default Playbar
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+  width: 50%;
+  margin: 4rem auto 0;
+  background: var(--backgroundColor);
+  color: #fff;
+  box-shadow: var(--lightShadow);
+  border-radius: var(--mainBorderRadius);
+
+  button {
+    padding: 10px;
+    width: 100px;
+    margin-top: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 760px) {
+    width: 100%;
+    padding: 1rem;
+  }
+`
