@@ -43,7 +43,7 @@ const Gallery = ({ mode }) => {
           <span>{showMini ? 'Normal' : 'Mini'}</span>
         </button>
       </BtnsContainer>
-      <div className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
+      <CardContainer className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
         {loading ? (
           <LoadingContainer>
             <ImgContainer>
@@ -75,7 +75,7 @@ const Gallery = ({ mode }) => {
             )
           })
         )}
-      </div>
+      </CardContainer>
     </GalleryContainer>
   )
 }
@@ -130,6 +130,29 @@ const BtnsContainer = styled.div`
     }
   }
 `
+
+// Enable the dynamic className
+const CardContainer = styled.div.attrs((props) => ({
+  className: props.className,
+}))`
+  &.card-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-auto-rows: 280px;
+    background: rgb(19, 19, 19);
+    color: #fff;
+    padding: 2rem;
+  }
+  &.card-grid-mini {
+    display: grid;
+    grid-row-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, 150px);
+    grid-auto-rows: 150px;
+    justify-content: space-evenly;
+  }
+`
+
 const LoadingContainer = styled.div`
   position: fixed;
   top: 70px;
