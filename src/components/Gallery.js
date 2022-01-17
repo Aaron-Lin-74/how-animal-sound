@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useGlobalContext } from '../context'
 import styled from 'styled-components'
 import load from '../resources/gifs/loading2.gif'
-import Card from './Card'
+import AnimalCard from './AnimalCard'
+import PlayCard from './PlayCard'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
@@ -10,7 +11,7 @@ import {
   FcGrid,
 } from 'react-icons/fc'
 
-const Gallery = () => {
+const Gallery = ({ mode }) => {
   const { animals, sortAnimals, sortAnimalsDesc, shuffleAnimals, loading } =
     useGlobalContext()
 
@@ -44,15 +45,26 @@ const Gallery = () => {
       </BtnsContainer>
       <div className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
         {loading ? (
-          <Loading>
+          <LoadingContainer>
             <ImgContainer>
               <img src={load} alt='loading...' />
             </ImgContainer>
-          </Loading>
+          </LoadingContainer>
+        ) : mode === 'play' ? (
+          animals.map((animal) => {
+            return (
+              <PlayCard
+                key={animal.name}
+                name={animal.name}
+                imageURL={animal.imageURL}
+                showMini={showMini}
+              />
+            )
+          })
         ) : (
           animals.map((animal) => {
             return (
-              <Card
+              <AnimalCard
                 key={Math.random()}
                 name={animal.name}
                 imageURL={animal.imageURL}
@@ -118,7 +130,7 @@ const BtnsContainer = styled.div`
     }
   }
 `
-const Loading = styled.div`
+const LoadingContainer = styled.div`
   position: fixed;
   top: 70px;
   right: 0;

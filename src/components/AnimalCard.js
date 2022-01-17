@@ -1,76 +1,51 @@
-import React, { useRef } from 'react'
-import { useGlobalContext } from '../context'
-import { useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { FcSpeaker } from 'react-icons/fc'
 
-const AnimalCard = ({ name, image, audio, link }) => {
-  const { checkResult, showMini } = useGlobalContext()
-  const sound = new Audio(audio)
+function AnimalCard({ name, imageURL, audioURL, link, showMini }) {
+  // const sound = new Audio(audioURL)
+  const [sound] = useState(new Audio(audioURL))
+  const [playing, setPlaying] = useState(false)
+
   const toggleSound = () => {
-    if (sound.paused) {
-      sound.play()
-    } else {
-      sound.pause()
-    }
+    setPlaying(!playing)
   }
-
   const stopSound = () => {
-    if (!sound.paused) {
-      setTimeout(() => sound.pause(), 1000)
-    }
+    setPlaying(false)
   }
 
-  const divRef = useRef(null)
+  useEffect(() => {
+    playing ? sound.play() : sound.pause()
+  }, [playing])
 
-  // Conditional rendering, check whether is in the play page.
-  const isPlayMode = useLocation().pathname.includes('play')
-  if (isPlayMode) {
-    return (
-      <div
-        className='animal-card'
-        ref={divRef}
-        onClick={() => checkResult(name)}
-      >
-        <div className='animal-card-inner'>
-          <div className='animal-card-font'>
-            <img
-              className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
-              src={image}
-              alt={`This is ${name}`}
-            />
-          </div>
-          <div className='animal-card-back'>
-            <p> {name}</p>
-          </div>
-        </div>
+  useEffect(() => {
+    sound.addEventListener('ended', () => setPlaying(false))
+    return sound.removeEventListener('ended', () => setPlaying(false))
+  }, [])
+
+  return (
+    <div className={`animal-card ${name}`}>
+      <img
+        className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
+        src={imageURL}
+        alt={`${name} is making sound`}
+        onClick={toggleSound}
+        onMouseLeave={stopSound}
+      />
+      <div className='animal-card-footer'>
+        <p>
+          <a
+            className='animal-link'
+            href={link}
+            target='_blank'
+            rel='noreferrer'
+          >
+            Learn {name}
+          </a>
+          {playing && <FcSpeaker />}
+        </p>
       </div>
-    )
-  } else {
-    return (
-      <div className={`animal-card ${name}`}>
-        <img
-          className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
-          src={image}
-          alt={`${name} is making sound`}
-          onClick={toggleSound}
-          onMouseLeave={stopSound}
-        />
-        {/* <h4 className="animal-name">{name.charAt(0).toUpperCase() + name.slice(1)}</h4> */}
-        <div className='animal-card-footer'>
-          {/* <h4 className='animal-name-capitalize'>{name}</h4> */}
-          <p>
-            <a
-              className='animal-link'
-              href={link}
-              target='_blank'
-              rel='noreferrer'
-            >
-              Learn more about {name}
-            </a>
-          </p>
-        </div>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default AnimalCard
