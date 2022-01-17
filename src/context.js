@@ -14,7 +14,8 @@ const initialState = {
 // Avoid hardcoded action strings, to reduce the bugs
 const ACTIONS = {
   SET_ANIMALS: 'SET_ANIMALS',
-  SET_LOADING: 'SET_LOADING',
+  OPEN_LOADING: 'OPEN_LOADING',
+  CLOSE_LOADING: 'CLOSE_LOADING',
   SET_SEARCHTERM: 'SET_SEARCHTERM',
   SET_ANIMALTYPE: 'SET_ANIMALTYPE',
 }
@@ -23,8 +24,12 @@ function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_ANIMALS:
       return { ...state, animals: action.payload.animals }
-    case ACTIONS.SET_LOADING:
-      return { ...state, loading: action.payload.loading }
+    case ACTIONS.OPEN_LOADING:
+      document.body.style.setProperty('overflow', 'hidden', 'important')
+      return { ...state, loading: true }
+    case ACTIONS.CLOSE_LOADING:
+      document.body.style.setProperty('overflow', 'visible', 'important')
+      return { ...state, loading: false }
     case ACTIONS.SET_SEARCHTERM:
       return { ...state, searchTerm: action.payload.searchTerm }
     case ACTIONS.SET_ANIMALTYPE:
@@ -43,9 +48,11 @@ const AppProvider = ({ children }) => {
 
   // make sure only one sound is in play
   const sound = useRef(null)
+
+  // Fetch the animals from server when animalType changes
   useEffect(() => {
     const loadAnimals = async (animalQuery) => {
-      dispatch({ type: ACTIONS.SET_LOADING, payload: { loading: true } })
+      dispatch({ type: ACTIONS.OPEN_LOADING })
       try {
         const querySnapshot = await getDocs(animalQuery)
         const result = []
@@ -54,10 +61,10 @@ const AppProvider = ({ children }) => {
         })
         dispatch({ type: ACTIONS.SET_ANIMALS, payload: { animals: result } })
         animalList.current = result
-        dispatch({ type: ACTIONS.SET_LOADING, payload: { loading: false } })
+        dispatch({ type: ACTIONS.CLOSE_LOADING })
       } catch (err) {
         console.log(err)
-        dispatch({ type: ACTIONS.SET_LOADING, payload: { loading: false } })
+        dispatch({ type: ACTIONS.CLOSE_LOADING })
       }
     }
     const animalQuery = query(animalsRef, orderBy('name', 'desc'), limit(100))
@@ -137,10 +144,11 @@ const AppProvider = ({ children }) => {
   const playRandomSound = () => {
     const randomPickNum = Math.floor(state.animals.length * Math.random())
     randomPickAnimal.current = state.animals[randomPickNum].name
-    sound.current = new Audio(state.animals[randomPickNum].audio)
+    sound.current = new Audio(state.animals[randomPickNum].audioURL)
     sound.current.play()
   }
 
+  // In play mode, check the picked result is right or wrong
   const checkResult = (name) => {
     // need to start the play first
     if (randomPickAnimal.current === '') {
@@ -165,7 +173,6 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  // In play mode, check the picked result is right or wrong
   return (
     <AppContext.Provider
       value={{
