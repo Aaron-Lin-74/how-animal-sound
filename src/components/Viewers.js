@@ -3,25 +3,25 @@ import styled from 'styled-components'
 import { useGlobalContext } from '../context'
 
 function Viewers() {
-  const { setType } = useGlobalContext()
+  const { setAnimalType } = useGlobalContext()
   return (
     <Container>
-      <Wrap onClick={() => setType('')} aniType='all'>
+      <Wrap onClick={() => setAnimalType('')} aniType='all'>
         <img src='/images/all.png' alt='all animals' />
       </Wrap>
-      <Wrap onClick={() => setType('mammal')} aniType='mammals'>
+      <Wrap onClick={() => setAnimalType('mammal')} aniType='mammals'>
         <img src='/images/mammal.png' alt='mammal' />
       </Wrap>
-      <Wrap onClick={() => setType('bird')} aniType='birds'>
+      <Wrap onClick={() => setAnimalType('bird')} aniType='birds'>
         <img src='/images/bird.png' alt='bird' />
       </Wrap>
-      <Wrap onClick={() => setType('amphibian')} aniType='amphibians'>
+      <Wrap onClick={() => setAnimalType('amphibian')} aniType='amphibians'>
         <img src='/images/amphibian.png' alt='amphibian' />
       </Wrap>
-      <Wrap onClick={() => setType('reptile')} aniType='reptiles'>
+      <Wrap onClick={() => setAnimalType('reptile')} aniType='reptiles'>
         <img src='/images/reptile.png' alt='reptile' />
       </Wrap>
-      <Wrap onClick={() => setType('insect')} aniType='insects'>
+      <Wrap onClick={() => setAnimalType('insect')} aniType='insects'>
         <img src='/images/insect.png' alt='insect' />
       </Wrap>
     </Container>
