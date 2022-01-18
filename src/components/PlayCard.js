@@ -8,7 +8,7 @@ const PlayCard = ({ name, imageURL, showMini }) => {
   return (
     <div className='animal-card' ref={divRef} onClick={() => checkResult(name)}>
       <div className='animal-card-inner'>
-        <div className='animal-card-font'>
+        <div className='animal-card-front'>
           <img
             className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
             src={imageURL}
