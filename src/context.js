@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef, useReducer } from 'react'
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useReducer,
+  useCallback,
+} from 'react'
 import { animalsRef, getDocs } from './firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
 
@@ -173,8 +179,12 @@ const AppProvider = ({ children }) => {
     }
   }
 
-  const setSearchTerm = (searchTerm) =>
-    dispatch({ type: ACTIONS.SET_SEARCHTERM, payload: { searchTerm } })
+  // For referential equality as this function is in the dependency array of another hook
+  const setSearchTerm = useCallback(
+    (searchTerm) =>
+      dispatch({ type: ACTIONS.SET_SEARCHTERM, payload: { searchTerm } }),
+    []
+  )
 
   return (
     <AppContext.Provider

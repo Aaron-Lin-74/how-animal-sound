@@ -19,7 +19,7 @@ const Gallery = ({ mode }) => {
   useEffect(() => {
     setSearchTerm('')
     setLocalAnimals(animals)
-  }, [animals])
+  }, [animals, setSearchTerm])
 
   //  Use the filter to implement the search function
   useEffect(() => {
