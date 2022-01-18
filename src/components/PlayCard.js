@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
-import { useGlobalContext } from '../context'
+import React, { useRef, useContext } from 'react'
+import { PlayContext } from '../pages/Play'
 
 const PlayCard = ({ name, imageURL, showMini }) => {
-  const { checkResult } = useGlobalContext()
+  const { checkResult } = useContext(PlayContext)
   const divRef = useRef(null)
 
   return (

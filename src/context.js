@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useReducer,
-  useCallback,
-} from 'react'
+import React, { useContext, useEffect, useReducer, useCallback } from 'react'
 import { animalsRef, getDocs } from './firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
 
@@ -46,14 +40,6 @@ function reducer(state, action) {
 }
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  // const animalList = useRef()
-
-  // useRef does not trigger the re-render
-  const randomPickAnimal = useRef('')
-  const selectedAnimal = useRef(null)
-
-  // make sure only one sound is in play
-  const sound = useRef(null)
 
   // Fetch the animals from server when animalType changes
   useEffect(() => {
@@ -84,101 +70,6 @@ const AppProvider = ({ children }) => {
     loadAnimals(q)
   }, [state.animalType])
 
-  // //  Use the filter to implement the search function
-  // useEffect(() => {
-  //   if (animalList.current) {
-  //     let searchedAnimals = animalList.current.filter((animal) =>
-  //       animal.name.toLowerCase().includes(state.searchTerm.toLowerCase())
-  //     )
-  //     if (state.searchTerm.length === 0) {
-  //       searchedAnimals = animalList.current
-  //     }
-  //     dispatch({
-  //       type: ACTIONS.SET_ANIMALS,
-  //       payload: { animals: searchedAnimals },
-  //     })
-  //   }
-  // }, [state.searchTerm])
-
-  // // Sort the animals by name A-Z, be aware, no copy is made!
-  // const sortAnimals = () => {
-  //   animalList.current.sort((animal1, animal2) => {
-  //     if (animal1.name < animal2.name) {
-  //       return -1
-  //     }
-  //     if (animal1.name > animal2.name) {
-  //       return 1
-  //     }
-  //     return 0
-  //   })
-
-  //   // We need to use the spread operator to copy the array to trigger the rerender, otherwise, since the reference does not change, react would not rerender it!
-  //   dispatch({
-  //     type: ACTIONS.SET_ANIMALS,
-  //     payload: { animals: [...animalList.current] },
-  //   })
-  // }
-
-  // // Sort the animals by name in descent order Z-A
-  // const sortAnimalsDesc = () => {
-  //   animalList.current.sort((animal1, animal2) => {
-  //     if (animal1.name < animal2.name) {
-  //       return 1
-  //     }
-  //     if (animal1.name > animal2.name) {
-  //       return -1
-  //     }
-  //     return 0
-  //   })
-  //   dispatch({
-  //     type: ACTIONS.SET_ANIMALS,
-  //     payload: { animals: [...animalList.current] },
-  //   })
-  // }
-
-  // const shuffleAnimals = () => {
-  //   animalList.current.sort((animal1, animal2) => {
-  //     return 0.5 - Math.random()
-  //   })
-  //   dispatch({
-  //     type: ACTIONS.SET_ANIMALS,
-  //     payload: { animals: [...animalList.current] },
-  //   })
-  // }
-
-  // In play mode, play a random animal sound to begin the play.
-  const playRandomSound = () => {
-    const randomPickNum = Math.floor(state.animals.length * Math.random())
-    randomPickAnimal.current = state.animals[randomPickNum].name
-    sound.current = new Audio(state.animals[randomPickNum].audioURL)
-    sound.current.play()
-  }
-
-  // In play mode, check the picked result is right or wrong
-  const checkResult = (name) => {
-    // need to start the play first
-    if (randomPickAnimal.current === '') {
-      window.confirm('Please press the play button first to start.')
-      return
-    }
-
-    // stop the current sound
-    sound.current.pause()
-
-    // const guessAnimal = divRef.current.className.slice(11)
-    selectedAnimal.current = name
-    if (selectedAnimal.current === randomPickAnimal.current) {
-      const correctText = `Great! You choose the right animal!
-      Press ok if you would like to play another one. Otherwise press cancel.`
-      if (window.confirm(correctText)) {
-        playRandomSound()
-      }
-    } else {
-      const wrongText = `Sorry you didn't choose the right animal. Have another try.`
-      window.confirm(wrongText)
-    }
-  }
-
   // For referential equality as this function is in the dependency array of another hook
   const setSearchTerm = useCallback(
     (searchTerm) =>
@@ -192,8 +83,6 @@ const AppProvider = ({ children }) => {
         animals: state.animals,
         searchTerm: state.searchTerm,
         setSearchTerm,
-        playRandomSound,
-        checkResult,
         loading: state.loading,
         setAnimalType: (animalType) =>
           dispatch({ type: ACTIONS.SET_ANIMALTYPE, payload: { animalType } }),

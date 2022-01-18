@@ -1,10 +1,10 @@
-import React, { useRef } from 'react'
-import { useGlobalContext } from '../context'
+import React, { useRef, useContext } from 'react'
 import styled from 'styled-components'
+import { PlayContext } from '../pages/Play'
 
 const Playbar = () => {
   const playButtonRef = useRef(null)
-  const { playRandomSound } = useGlobalContext()
+  const { playRandomSound } = useContext(PlayContext)
   return (
     <Container>
       <h2>Which animal did you hear?</h2>
