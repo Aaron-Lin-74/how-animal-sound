@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useGlobalContext } from '../context'
 import styled from 'styled-components'
 import load from '../resources/gifs/loading2.gif'
@@ -12,8 +12,28 @@ import {
 } from 'react-icons/fc'
 
 const Gallery = ({ mode }) => {
-  const { animals, sortAnimals, sortAnimalsDesc, shuffleAnimals, loading } =
-    useGlobalContext()
+  const { animals, loading, searchTerm, setSearchTerm } = useGlobalContext()
+
+  // Local copy of the fetched animals
+  const [localAnimals, setLocalAnimals] = useState([])
+  useEffect(() => {
+    setSearchTerm('')
+    setLocalAnimals(animals)
+  }, [animals])
+
+  //  Use the filter to implement the search function
+  useEffect(() => {
+    if (searchTerm.length !== 0) {
+      setLocalAnimals([
+        ...animals.filter((animal) =>
+          animal.name.toLowerCase().includes(searchTerm.toLowerCase())
+        ),
+      ])
+    } else {
+      // Load all animals when searchTerm is empty
+      setLocalAnimals(animals)
+    }
+  }, [searchTerm, animals])
 
   // Local state for gallery animal card mini mode
   const [showMini, setShowMini] = useState(false)
@@ -21,6 +41,45 @@ const Gallery = ({ mode }) => {
   // Toggle the gallery animal card mode
   const toggleMini = () => {
     setShowMini(!showMini)
+  }
+
+  // Sort the animals by name A-Z
+  const sortAnimals = () => {
+    setLocalAnimals((localAnimals) => [
+      ...localAnimals.sort((animal1, animal2) => {
+        if (animal1.name < animal2.name) {
+          return -1
+        }
+        if (animal1.name > animal2.name) {
+          return 1
+        }
+        return 0
+      }),
+    ])
+  }
+
+  // Sort the animals by name in descent order Z-A
+  const sortAnimalsDesc = () => {
+    setLocalAnimals((localAnimals) => [
+      ...localAnimals.sort((animal1, animal2) => {
+        if (animal1.name < animal2.name) {
+          return 1
+        }
+        if (animal1.name > animal2.name) {
+          return -1
+        }
+        return 0
+      }),
+    ])
+  }
+
+  // Randomly order the animals
+  const shuffleAnimals = () => {
+    setLocalAnimals((localAnimals) => [
+      ...localAnimals.sort(() => {
+        return 0.5 - Math.random()
+      }),
+    ])
   }
 
   return (
@@ -51,7 +110,7 @@ const Gallery = ({ mode }) => {
             </ImgContainer>
           </LoadingContainer>
         ) : mode === 'play' ? (
-          animals.map((animal) => {
+          localAnimals.map((animal) => {
             return (
               <PlayCard
                 key={animal.name}
@@ -62,10 +121,10 @@ const Gallery = ({ mode }) => {
             )
           })
         ) : (
-          animals.map((animal) => {
+          localAnimals.map((animal) => {
             return (
               <AnimalCard
-                key={Math.random()}
+                key={animal.name}
                 name={animal.name}
                 imageURL={animal.imageURL}
                 audioURL={animal.audioURL}
