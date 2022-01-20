@@ -1,16 +1,30 @@
 import React, { useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PlayContext } from '../pages/Play'
+import { useGlobalContext } from '../context'
+import { FcSearch } from 'react-icons/fc'
 
 const Playbar = () => {
   const playButtonRef = useRef(null)
-  const { playRandomSound } = useContext(PlayContext)
+  const { playRandomSound, playing } = useContext(PlayContext)
+  const { setSearchTerm } = useGlobalContext()
+  const searchValue = useRef(null)
   return (
     <Container>
       <h2>Which animal did you hear?</h2>
-      <button ref={playButtonRef} onClick={playRandomSound}>
+      <button ref={playButtonRef} onClick={playRandomSound} disabled={playing}>
         Play
       </button>
+      <SearchContainer>
+        <FcSearch />
+        <input
+          id='name'
+          type='text'
+          ref={searchValue}
+          placeholder='Search...'
+          onChange={() => setSearchTerm(searchValue.current.value)}
+        />
+      </SearchContainer>
     </Container>
   )
 }
@@ -40,5 +54,23 @@ const Container = styled.div`
   @media (max-width: 760px) {
     width: 100%;
     padding: 1rem;
+  }
+`
+const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin-top: 20px;
+  background: #fff;
+  width: 40%;
+
+  input {
+    width: 70%;
+    border: none;
+    border-color: transparent;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    outline: none;
   }
 `

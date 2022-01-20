@@ -14,7 +14,7 @@ import {
 const Gallery = ({ mode }) => {
   const { animals, loading, searchTerm, setSearchTerm } = useGlobalContext()
 
-  // Local copy of the fetched animals
+  // Local copy of the fetched animals, so that we can sort and filter on it
   const [localAnimals, setLocalAnimals] = useState([])
   useEffect(() => {
     setSearchTerm('')

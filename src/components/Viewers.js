@@ -68,6 +68,7 @@ const Wrap = styled.div`
     border: 3px solid rgba(249, 249, 249, 0.8);
     box-shadow: rgba(229, 229, 229, 0.69) 0px 26px 30px -10px,
       rgba(229, 229, 229, 0.73) 0px 16px 10px -10px;
+
     img {
       opacity: 0.2;
     }
@@ -90,5 +91,21 @@ const Wrap = styled.div`
       font-size: 15px;
       font-weight: 200;
     }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    transform: skewX(45deg) translateX(280%);
+    transition: all 250ms ease-in;
+  }
+
+  &:hover::before {
+    transform: skewX(45deg) translateX(-280%);
   }
 `

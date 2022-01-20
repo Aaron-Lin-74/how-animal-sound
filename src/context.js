@@ -52,10 +52,9 @@ const AppProvider = ({ children }) => {
           result.push(doc.data())
         })
         dispatch({ type: ACTIONS.SET_ANIMALS, payload: { animals: result } })
-        // animalList.current = result
-        dispatch({ type: ACTIONS.CLOSE_LOADING })
       } catch (err) {
         console.log(err)
+      } finally {
         dispatch({ type: ACTIONS.CLOSE_LOADING })
       }
     }

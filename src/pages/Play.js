@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import Gallery from '../components/Gallery'
 import Playbar from '../components/Playbar'
 import { useGlobalContext } from '../context'
@@ -7,6 +7,7 @@ export const PlayContext = React.createContext()
 
 const Play = () => {
   const { animals } = useGlobalContext()
+  const [playing, setPlaying] = useState(false)
 
   // useRef does not trigger the re-render
   const randomPickAnimal = useRef('')
@@ -21,6 +22,7 @@ const Play = () => {
     randomPickAnimal.current = animals[randomPickNum].name
     sound.current = new Audio(animals[randomPickNum].audioURL)
     sound.current.play()
+    setPlaying(true)
   }
   // In play mode, check the picked result is right or wrong
   const checkResult = (name) => {
@@ -40,6 +42,8 @@ const Play = () => {
       Press ok if you would like to play another one. Otherwise press cancel.`
       if (window.confirm(correctText)) {
         playRandomSound()
+      } else {
+        setPlaying(false)
       }
     } else {
       const wrongText = `Sorry you didn't choose the right animal. Have another try.`
@@ -48,7 +52,7 @@ const Play = () => {
   }
   return (
     <div>
-      <PlayContext.Provider value={{ playRandomSound, checkResult }}>
+      <PlayContext.Provider value={{ playRandomSound, checkResult, playing }}>
         <Playbar />
         <Gallery mode='play' />
       </PlayContext.Provider>
