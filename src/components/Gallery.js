@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../contexts/AppContext'
 import styled from 'styled-components'
 import load from '../resources/gifs/loading2.gif'
 import AnimalCard from './AnimalCard'
 import PlayCard from './PlayCard'
+import Zoom from 'react-reveal/Zoom'
+import Bounce from 'react-reveal/Bounce'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
@@ -112,25 +114,29 @@ const Gallery = ({ mode }) => {
         ) : mode === 'play' ? (
           localAnimals.map((animal) => {
             return (
-              <PlayCard
-                key={animal.name}
-                name={animal.name}
-                imageURL={animal.imageURL}
-                showMini={showMini}
-              />
+              <Zoom>
+                <PlayCard
+                  key={animal.name}
+                  name={animal.name}
+                  imageURL={animal.imageURL}
+                  showMini={showMini}
+                />
+              </Zoom>
             )
           })
         ) : (
           localAnimals.map((animal) => {
             return (
-              <AnimalCard
-                key={animal.name}
-                name={animal.name}
-                imageURL={animal.imageURL}
-                audioURL={animal.audioURL}
-                link={animal.link}
-                showMini={showMini}
-              />
+              <Bounce>
+                <AnimalCard
+                  key={animal.name}
+                  name={animal.name}
+                  imageURL={animal.imageURL}
+                  audioURL={animal.audioURL}
+                  link={animal.link}
+                  showMini={showMini}
+                />
+              </Bounce>
             )
           })
         )}
@@ -214,7 +220,7 @@ const CardContainer = styled.div.attrs((props) => ({
 
 const LoadingContainer = styled.div`
   position: fixed;
-  top: 70px;
+  top: var(--navbarHeight);
   right: 0;
   bottom: 0;
   left: 0;

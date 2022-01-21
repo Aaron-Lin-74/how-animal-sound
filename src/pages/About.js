@@ -6,14 +6,14 @@ import LightSpeed from 'react-reveal/LightSpeed'
 const About = () => {
   return (
     <Container>
-      <AboutContainer>
+      <AboutWrap>
         <Zoom>
           <div>
             <h1>About Us</h1>
           </div>
         </Zoom>
-      </AboutContainer>
-      <TextContainer>
+      </AboutWrap>
+      <TextWrap>
         <LightSpeed left>
           <Text>
             This website application is developed by Aaron Lin for his beloved
@@ -32,7 +32,7 @@ const About = () => {
             on.
           </Text>
         </LightSpeed>
-      </TextContainer>
+      </TextWrap>
     </Container>
   )
 }
@@ -49,7 +49,7 @@ const Container = styled.div`
   background-attachment: fixed;
 `
 
-const AboutContainer = styled.div`
+const AboutWrap = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -69,7 +69,7 @@ const AboutContainer = styled.div`
     min-width: 320px;
   }
 `
-const TextContainer = styled.div`
+const TextWrap = styled.div`
   width: 100%;
   min-height: 100vh;
   background: rgba(0, 0, 0, 0.5);
