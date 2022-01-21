@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer, useCallback } from 'react'
-import { animalsRef, getDocs } from './firebase'
+import { animalsRef, getDocs } from '../firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
 
 const AppContext = React.createContext()

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../contexts/AppContext'
 
 function Viewers() {
   const { setAnimalType } = useGlobalContext()

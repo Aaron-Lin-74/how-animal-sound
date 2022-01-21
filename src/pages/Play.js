@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Gallery from '../components/Gallery'
 import Playbar from '../components/Playbar'
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../contexts/AppContext'
 
 export const PlayContext = React.createContext()
 
