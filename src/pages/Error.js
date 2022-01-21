@@ -22,7 +22,7 @@ const Error = () => {
 export default Error
 const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--navbarHeight));
   background-image: url('/images/error-background.gif');
   background-repeat: no-repeat;
   background-position: right;

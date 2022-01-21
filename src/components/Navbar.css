@@ -1,5 +1,5 @@
 .navbar {
-  height: 70px;
+  height: var(--navbarHeight);
   display: flex;
   align-items: center;
   border-bottom: 2px solid black;
@@ -7,6 +7,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  overflow: hidden;
 }
 .nav-center {
   display: flex;

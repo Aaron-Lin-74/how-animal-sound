@@ -17,7 +17,7 @@ const Home = () => {
 export default Home
 
 const Container = styled.div`
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - var(--navbarHeight));
   padding: 0 calc(3.5vw + 5px);
   overflow-x: hidden;
   position: relative;
