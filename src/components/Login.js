@@ -1,11 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import { signInWithGoogle } from '../firebase'
+import { Redirect } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 
 function Login() {
+  // Once login, redirect to home page
+  const currentUser = useAuth()
+  if (currentUser) {
+    return <Redirect to='/' />
+  }
   return (
     <Container>
       <Content>
+        <h2>SIGN IN WITH YOUR GOOGLE ACCOUNT </h2>
         <LoginBtn onClick={signInWithGoogle}>GET ALL THERE</LoginBtn>
       </Content>
     </Container>
@@ -15,7 +23,7 @@ function Login() {
 export default Login
 
 const Container = styled.div`
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - var(--navbarHeight));
   padding: 0 calc(3.5vw + 5px);
   position: relative;
   display: flex;
@@ -51,7 +59,7 @@ const LoginBtn = styled.a`
   background-color: #0063e5;
   font-weight: bold;
   font-size: 18px;
-  padding: 17px 0;
+  padding: 10px 17px;
   text-align: center;
   cursor: pointer;
   border-radius: 4px;

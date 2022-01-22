@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { useState, useEffect } from 'react'
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -77,31 +76,5 @@ export {
   animalsRef,
   onSnapshot,
   updateProfile,
+  onAuthStateChanged,
 }
-
-// custome hook to get the current user
-export function useAuth() {
-  const [currentUser, setCurrentUser] = useState(null)
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => setCurrentUser(user))
-    return unsubscribe
-  }, [])
-  return currentUser
-}
-
-// export function useLoadAnimals() {
-//   const [animals, setAnimals] = useState([])
-
-//   useEffect(() => {
-//     const loadAnimals = async () => {
-//       const querySnapshot = await getDocs(animalQuery)
-//       const result = []
-//       querySnapshot.forEach((doc) => {
-//         result.push(doc.data())
-//       })
-//       setAnimals(result)
-//     }
-//     loadAnimals()
-//   }, [animalQuery])
-//   return animals
-// }

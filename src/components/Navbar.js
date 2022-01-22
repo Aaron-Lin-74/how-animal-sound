@@ -9,8 +9,10 @@ import {
   AiFillContacts,
 } from 'react-icons/ai'
 import { RiSearchFill } from 'react-icons/ri'
-import { useAuth, signOutUser } from '../firebase'
+import { signOutUser } from '../firebase'
 import { Link } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
+
 const Navbar = () => {
   const [click, setClick] = useState(false)
   const toggleMenu = () => setClick(!click)
@@ -20,12 +22,14 @@ const Navbar = () => {
     <nav className='navbar'>
       <div className='nav-center'>
         <div className='nav-header'>
-          <img
-            src={logo}
-            alt='logo'
-            className='logo'
-            onClick={closeMobileMenu}
-          />
+          <Link to='/'>
+            <img
+              src={logo}
+              alt='logo'
+              className='logo'
+              onClick={closeMobileMenu}
+            />
+          </Link>
           <button className={'nav-toggle'} onClick={toggleMenu}>
             {click ? <FcPrevious /> : <FcMenu />}
           </button>
@@ -38,12 +42,14 @@ const Navbar = () => {
               Home
             </Link>
           </li>
-          <li className='nav-links' onClick={closeMobileMenu}>
-            <Link to='/play'>
-              <AiFillPlaySquare />
-              Play
-            </Link>
-          </li>
+          {currentUser && (
+            <li className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/play'>
+                <AiFillPlaySquare />
+                Play
+              </Link>
+            </li>
+          )}
           <li className='nav-links' onClick={closeMobileMenu}>
             <Link to='/about'>
               <AiFillInfoCircle />
@@ -51,9 +57,9 @@ const Navbar = () => {
             </Link>
           </li>
           <li className='nav-links' onClick={closeMobileMenu}>
-            <Link to='/contactus'>
+            <Link to='/contact'>
               <AiFillContacts />
-              Contact Us
+              Contact
             </Link>
           </li>
 
@@ -66,7 +72,7 @@ const Navbar = () => {
 
           {currentUser && (
             <li className='nav-links' onClick={closeMobileMenu}>
-              <Link to='/dashboard'>
+              <Link to='/'>
                 <div className='wrap'>
                   <img
                     className='profile'
@@ -74,6 +80,7 @@ const Navbar = () => {
                     alt='user-profile'
                   />
                 </div>
+                {currentUser.displayName}
               </Link>
             </li>
           )}
