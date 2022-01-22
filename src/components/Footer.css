@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 15vh;
 }
 
 .footer-links {
@@ -22,6 +23,10 @@
 .footer-nav-items > a {
   color: white;
   text-decoration: none;
+}
+
+.footer-logo {
+  width: 150px;
 }
 /* social icon */
 .social-icon-link {
@@ -58,6 +63,7 @@
 @media screen and (max-width: 720px) {
   .footer-container {
     padding: 1rem 0;
+    height: 30vh;
   }
   .footer-subscription {
     padding-top: 10rem;

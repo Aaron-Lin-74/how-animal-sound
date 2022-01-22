@@ -8,10 +8,9 @@ const Footer = () => {
     <div className='footer-container'>
       <section className='footer-links'>
         <div className='footer-nav-items'>
-          <Link to='/'>Contact</Link>
           <Link to='/about'>About Us</Link>
-          <Link to='/'>FAQ</Link>
-          <Link to='/'>Terms of Use</Link>
+          <Link to='/contact'>Contact Us</Link>
+          <Link to='/terms'>Terms of Use</Link>
         </div>
       </section>
       <section className='social-media'>

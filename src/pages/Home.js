@@ -21,6 +21,7 @@ const Container = styled.div`
   padding: 0 calc(3.5vw + 5px);
   overflow-x: hidden;
   position: relative;
+  padding-bottom: 10px;
 
   &:after {
     content: '';
