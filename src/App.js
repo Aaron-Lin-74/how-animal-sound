@@ -8,7 +8,11 @@ import Footer from './components/Footer'
 import Login from './components/Login'
 import Upload from './components/Upload'
 import Search from './pages/Search'
+import Contact from './pages/Contact'
+import ThankYou from './pages/ThankYou'
+import Terms from './pages/Terms'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 function App() {
   return (
     <div>
@@ -24,8 +28,17 @@ function App() {
           <Route path='/about'>
             <About />
           </Route>
+          <Route path='/contact'>
+            <Contact />
+          </Route>
+          <Route path='/thankyou'>
+            <ThankYou />
+          </Route>
           <Route path='/search'>
             <Search />
+          </Route>
+          <Route path='/terms'>
+            <Terms />
           </Route>
           <Route path='/login'>
             <Login />
