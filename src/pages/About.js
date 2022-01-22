@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Zoom from 'react-reveal/Zoom'
-import LightSpeed from 'react-reveal/LightSpeed'
+import { Zoom, Fade } from 'react-awesome-reveal'
 
 const About = () => {
   return (
@@ -14,7 +13,7 @@ const About = () => {
         </Zoom>
       </AboutWrap>
       <TextWrap>
-        <LightSpeed left>
+        <Fade>
           <Text>
             This website application is developed by Aaron Lin for his beloved
             children and is a good place for kids to learn what different
@@ -31,7 +30,7 @@ const About = () => {
             We will add the new sounds to the database regularly as time goes
             on.
           </Text>
-        </LightSpeed>
+        </Fade>
       </TextWrap>
     </Container>
   )
@@ -71,7 +70,7 @@ const AboutWrap = styled.div`
 `
 const TextWrap = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: calc(85vh - var(--navbarHeight));
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;

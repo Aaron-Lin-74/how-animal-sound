@@ -2,22 +2,23 @@ import React from 'react'
 import { FcSpeaker } from 'react-icons/fc'
 import useAudio from '../hooks/useAudio'
 import styled from 'styled-components'
+import { Fade } from 'react-awesome-reveal'
 
 function AnimalCard({ name, imageURL, audioURL, link, showMini }) {
   const { playing, toggle, stopPlaying } = useAudio(audioURL)
 
   return (
-    <Container>
-      <img
-        className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
-        src={imageURL}
-        alt={`${name} is making sound`}
-        onClick={toggle}
-        onMouseLeave={stopPlaying}
-      />
-      {!showMini && (
-        <FooterContainer>
-          <p>
+    <Fade>
+      <Container>
+        <img
+          className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
+          src={imageURL}
+          alt={`${name} is making sound`}
+          onClick={toggle}
+          onMouseLeave={stopPlaying}
+        />
+        {!showMini && (
+          <FooterContainer>
             <a
               className='animal-link'
               href={link}
@@ -25,12 +26,12 @@ function AnimalCard({ name, imageURL, audioURL, link, showMini }) {
               rel='noreferrer'
             >
               Learn {name}
+              {playing && <FcSpeaker />}
             </a>
-            {playing && <FcSpeaker />}
-          </p>
-        </FooterContainer>
-      )}
-    </Container>
+          </FooterContainer>
+        )}
+      </Container>
+    </Fade>
   )
 }
 
@@ -84,13 +85,10 @@ const FooterContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  p {
-    margin: 0.5rem;
-  }
-
   a {
     color: #fff;
     text-decoration: none;
     text-transform: capitalize;
+    margin: 0.5rem;
   }
 `

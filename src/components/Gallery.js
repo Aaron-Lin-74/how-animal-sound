@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import load from '../resources/gifs/loading2.gif'
 import AnimalCard from './AnimalCard'
 import PlayCard from './PlayCard'
-import Zoom from 'react-reveal/Zoom'
-import Bounce from 'react-reveal/Bounce'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
@@ -114,29 +112,25 @@ const Gallery = ({ mode }) => {
         ) : mode === 'play' ? (
           localAnimals.map((animal) => {
             return (
-              <Zoom>
-                <PlayCard
-                  key={animal.name}
-                  name={animal.name}
-                  imageURL={animal.imageURL}
-                  showMini={showMini}
-                />
-              </Zoom>
+              <PlayCard
+                key={animal.name}
+                name={animal.name}
+                imageURL={animal.imageURL}
+                showMini={showMini}
+              />
             )
           })
         ) : (
           localAnimals.map((animal) => {
             return (
-              <Bounce>
-                <AnimalCard
-                  key={animal.name}
-                  name={animal.name}
-                  imageURL={animal.imageURL}
-                  audioURL={animal.audioURL}
-                  link={animal.link}
-                  showMini={showMini}
-                />
-              </Bounce>
+              <AnimalCard
+                key={animal.name}
+                name={animal.name}
+                imageURL={animal.imageURL}
+                audioURL={animal.audioURL}
+                link={animal.link}
+                showMini={showMini}
+              />
             )
           })
         )}

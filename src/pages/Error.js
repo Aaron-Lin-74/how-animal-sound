@@ -1,20 +1,19 @@
 import React from 'react'
-import Bounce from 'react-reveal/Bounce'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Zoom from 'react-reveal/Zoom'
+import { Fade } from 'react-awesome-reveal'
 
 const Error = () => {
   return (
     <Container>
-      <Bounce left>
+      <Fade left>
         <h1>Error 404</h1>
-      </Bounce>
-      <Zoom>
+      </Fade>
+      <Fade>
         <h2>
           Click <Link to='/'>here</Link> to go back to the home page.
         </h2>
-      </Zoom>
+      </Fade>
     </Container>
   )
 }
