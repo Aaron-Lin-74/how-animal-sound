@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
+import { addDoc, subscriptionRef } from '../firebase'
 
 function Subscription() {
+  const [email, setEmail] = useState()
+  const history = useHistory()
+  const subscribe = async (e) => {
+    e.preventDefault()
+    try {
+      await addDoc(subscriptionRef, { email: email })
+    } catch (error) {
+      console.error('Something goes wrong', error)
+    }
+    setEmail('')
+    history.push('/thankyou')
+  }
   return (
     <Container>
       <Content>
@@ -12,13 +26,14 @@ function Subscription() {
           You can unsubscribe at any time.
         </p>
         <InputForm>
-          <form>
+          <form onSubmit={subscribe}>
             <input
               type='email'
               name='email'
               className='footer-input'
               placeholder='Your Email'
               required
+              onChange={(e) => setEmail(e.target.value)}
             />
             <button type='submit' className='btn'>
               Subscribe

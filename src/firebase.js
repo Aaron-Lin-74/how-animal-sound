@@ -37,6 +37,7 @@ const db = getFirestore(app)
 const auth = getAuth()
 const provider = new GoogleAuthProvider()
 const animalsRef = collection(db, 'animals')
+const subscriptionRef = collection(db, 'subscription')
 
 const signInWithGoogle = async () => {
   // signInWithRedirect(auth, provider)
@@ -74,6 +75,7 @@ export {
   getDocs,
   animalQuery,
   animalsRef,
+  subscriptionRef,
   onSnapshot,
   updateProfile,
   onAuthStateChanged,
