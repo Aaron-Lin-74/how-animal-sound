@@ -50,7 +50,7 @@ const Container = styled.div`
 
 const AboutWrap = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +70,7 @@ const AboutWrap = styled.div`
 `
 const TextWrap = styled.div`
   width: 100%;
-  height: calc(85vh - var(--navbarHeight));
+  min-height: calc(85vh - var(--navbarHeight));
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;

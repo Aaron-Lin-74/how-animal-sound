@@ -148,7 +148,7 @@ const GalleryContainer = styled.div`
   justify-content: center;
   align-items: center; */
   padding: 0 2rem 1rem;
-  min-height: 100vh;
+  // min-height: 100vh;
   min-width: 320px;
   background: var(--backgroundColor);
 
@@ -208,6 +208,7 @@ const CardContainer = styled.div.attrs((props) => ({
     grid-row-gap: 1rem;
     grid-template-columns: repeat(auto-fill, 150px);
     grid-auto-rows: 150px;
+    background: rgb(19, 19, 19);
     justify-content: space-evenly;
   }
 `
