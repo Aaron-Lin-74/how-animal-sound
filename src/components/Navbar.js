@@ -8,6 +8,7 @@ import {
   AiFillInfoCircle,
   AiFillContacts,
 } from 'react-icons/ai'
+import { IoMdCloudUpload } from 'react-icons/io'
 import { RiSearchFill } from 'react-icons/ri'
 import { signOutUser } from '../firebase'
 import { Link } from 'react-router-dom'
@@ -50,6 +51,15 @@ const Navbar = () => {
               </Link>
             </li>
           )}
+          {currentUser &&
+            currentUser.email === process.env.REACT_APP_ADMIN_EMAIL && (
+              <li className='nav-links' onClick={closeMobileMenu}>
+                <Link to='/upload'>
+                  <IoMdCloudUpload />
+                  Upload
+                </Link>
+              </li>
+            )}
           <li className='nav-links' onClick={closeMobileMenu}>
             <Link to='/about'>
               <AiFillInfoCircle />
