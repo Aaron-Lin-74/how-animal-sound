@@ -10,7 +10,7 @@ const Contact = () => {
       </TextWrapper>
       <FormWrapper>
         <Form
-          action='https://formsubmit.co/4699fbde88305d25523009d4086457b3 '
+          action={`https://formsubmit.co/${process.env.REACT_APP_FORM_SUBMIT_CODE}`}
           method='POST'
         >
           <input type='text' name='name' placeholder='NAME' required />
