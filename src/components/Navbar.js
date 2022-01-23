@@ -80,9 +80,9 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {currentUser && (
-            <li className='nav-links' onClick={closeMobileMenu}>
-              <Link to='/'>
+          <li className='nav-links' onClick={closeMobileMenu}>
+            {currentUser ? (
+              <Link to='/login' onClick={signOutUser} id='logout'>
                 <div className='wrap'>
                   <img
                     className='profile'
@@ -90,14 +90,6 @@ const Navbar = () => {
                     alt='user-profile'
                   />
                 </div>
-                {currentUser.displayName}
-              </Link>
-            </li>
-          )}
-          <li className='nav-links' onClick={closeMobileMenu}>
-            {currentUser ? (
-              <Link to='/' onClick={signOutUser}>
-                Logout
               </Link>
             ) : (
               <Link to='/login'>Login</Link>
