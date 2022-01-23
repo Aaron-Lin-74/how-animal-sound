@@ -11,7 +11,7 @@ const ThankYou = () => {
 
 export default ThankYou
 const Container = styled.div`
-  height: calc(85vh - var(--navbarHeight));
+  min-height: calc(85vh - var(--navbarHeight));
   padding: 30px calc(3.5vw + 5px);
   overflow: hidden;
   background: url('/images/thankyou-background.jpg') left no-repeat fixed;

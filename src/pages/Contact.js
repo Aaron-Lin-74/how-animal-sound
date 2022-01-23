@@ -31,7 +31,7 @@ const Contact = () => {
 
 export default Contact
 const Container = styled.div`
-  height: calc(85vh - var(--navbarHeight));
+  min-height: calc(85vh - var(--navbarHeight));
   padding: 0 calc(3.5vw + 5px);
   overflow: hidden;
   background: url('/images/home-background.png') cover no-repeat fixed center;
