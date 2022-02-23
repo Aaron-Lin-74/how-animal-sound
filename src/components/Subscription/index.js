@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import { addDoc, subscriptionRef } from '../firebase'
+import { addDoc, subscriptionRef } from '../../firebase'
 
 function Subscription() {
   const [email, setEmail] = useState()

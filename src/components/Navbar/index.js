@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Navbar.css'
-import logo from '../logo.svg'
+import logo from '../../logo.svg'
 import { FcMenu, FcPrevious } from 'react-icons/fc'
 import {
   AiFillHome,
@@ -10,9 +10,9 @@ import {
 } from 'react-icons/ai'
 import { IoMdCloudUpload } from 'react-icons/io'
 import { RiSearchFill } from 'react-icons/ri'
-import { signOutUser } from '../firebase'
+import { signOutUser } from '../../firebase'
 import { Link } from 'react-router-dom'
-import useAuth from '../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 
 const Navbar = () => {
   const [click, setClick] = useState(false)

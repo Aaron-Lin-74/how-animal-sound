@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { signInWithGoogle } from '../firebase'
+import { signInWithGoogle } from '../../firebase'
 import { Redirect } from 'react-router-dom'
-import useAuth from '../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 
 function Login() {
   // Once login, redirect to home page

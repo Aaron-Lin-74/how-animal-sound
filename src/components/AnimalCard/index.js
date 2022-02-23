@@ -1,6 +1,6 @@
 import React from 'react'
 import { FcSpeaker } from 'react-icons/fc'
-import useAudio from '../hooks/useAudio'
+import useAudio from '../../hooks/useAudio'
 import styled from 'styled-components'
 import { Fade } from 'react-awesome-reveal'
 
