@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from 'react'
-import { PlayContext } from '../pages/Play'
+import { PlayContext } from '../../pages/Play'
 
 const PlayCard = ({ name, imageURL, showMini }) => {
   const { checkResult } = useContext(PlayContext)

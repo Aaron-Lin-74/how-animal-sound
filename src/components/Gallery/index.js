@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useGlobalContext } from '../contexts/AppContext'
+import { useGlobalContext } from '../../contexts/AppContext'
 import styled from 'styled-components'
-import load from '../resources/gifs/loading2.gif'
-import AnimalCard from './AnimalCard'
-import PlayCard from './PlayCard'
+import AnimalCard from '../AnimalCard'
+import PlayCard from '../PlayCard'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
@@ -106,7 +105,7 @@ const Gallery = ({ mode }) => {
         {loading ? (
           <LoadingContainer>
             <ImgContainer>
-              <img src={load} alt='loading...' />
+              <img src='/images/loading.gif' alt='loading...' />
             </ImgContainer>
           </LoadingContainer>
         ) : mode === 'play' ? (

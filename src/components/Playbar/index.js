@@ -1,7 +1,7 @@
 import React, { useRef, useContext } from 'react'
 import styled from 'styled-components'
-import { PlayContext } from '../pages/Play'
-import { useGlobalContext } from '../contexts/AppContext'
+import { PlayContext } from '../../pages/Play'
+import { useGlobalContext } from '../../contexts/AppContext'
 import { FcSearch } from 'react-icons/fc'
 
 const Playbar = () => {

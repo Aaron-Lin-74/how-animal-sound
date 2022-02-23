@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addDoc, animalsRef } from '../firebase'
+import { addDoc, animalsRef } from '../../firebase'
 import styled from 'styled-components'
 import {
   getStorage,
