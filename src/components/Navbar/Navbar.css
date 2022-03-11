@@ -1,4 +1,4 @@
-.navbar {
+.header {
   height: var(--navbarHeight);
   display: flex;
   align-items: center;
@@ -8,7 +8,7 @@
   top: 0;
   z-index: 1;
 }
-.nav-center {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;

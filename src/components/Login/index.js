@@ -22,7 +22,7 @@ function Login() {
 
 export default Login
 
-const Container = styled.div`
+const Container = styled.main`
   min-height: calc(85vh - var(--navbarHeight));
   padding: 0 calc(3.5vw + 5px);
   position: relative;

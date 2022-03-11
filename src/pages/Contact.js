@@ -6,16 +6,32 @@ const Contact = () => {
     <Container>
       <TextWrapper>
         <h1>Contact Us</h1>
-        <h3>We'd love to hear from you!</h3>
+        <h2>We'd love to hear from you!</h2>
       </TextWrapper>
       <FormWrapper>
         <Form
           action={`https://formsubmit.co/${process.env.REACT_APP_FORM_SUBMIT_CODE}`}
           method='POST'
         >
-          <input type='text' name='name' placeholder='NAME' required />
-          <input type='email' name='email' placeholder='EMAIL' required />
-          <textarea name='message' placeholder='MESSAGE'></textarea>
+          <input
+            type='text'
+            name='name'
+            placeholder='NAME'
+            aria-label='name'
+            required
+          />
+          <input
+            type='email'
+            name='email'
+            placeholder='EMAIL'
+            aria-label='email'
+            required
+          />
+          <textarea
+            name='message'
+            aria-label='message'
+            placeholder='MESSAGE'
+          ></textarea>
           <input
             type='hidden'
             name='_next'
@@ -30,7 +46,7 @@ const Contact = () => {
 }
 
 export default Contact
-const Container = styled.div`
+const Container = styled.main`
   min-height: calc(85vh - var(--navbarHeight));
   padding: 0 calc(3.5vw + 5px);
   overflow: hidden;
@@ -40,7 +56,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `
-const TextWrapper = styled.div`
+const TextWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -56,13 +72,13 @@ const TextWrapper = styled.div`
     letter-spacing: 6px;
   }
 
-  h3 {
+  h2 {
     text-align: center;
     text-transform: capitalize;
     color: #fff;
   }
 `
-const FormWrapper = styled.div`
+const FormWrapper = styled.section`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -91,6 +107,9 @@ const Form = styled.form`
     &:focus {
       border: 1px solid #fd917e;
     }
+  }
+  label {
+    text-align: center;
   }
 
   textarea {

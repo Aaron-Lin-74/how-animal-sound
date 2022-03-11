@@ -112,7 +112,7 @@ function Upload({ currentUser }) {
 }
 
 export default Upload
-const Container = styled.div`
+const Container = styled.main`
   height: calc(85vh - var(--navbarHeight));
   padding: 0 calc(3.5vw + 5px);
   overflow: hidden;

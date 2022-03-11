@@ -4,10 +4,10 @@ import Gallery from '../components/Gallery'
 
 function Search() {
   return (
-    <div>
+    <main>
       <SearchForm />
       <Gallery />
-    </div>
+    </main>
   )
 }
 

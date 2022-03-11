@@ -38,7 +38,7 @@ const About = () => {
 
 export default About
 
-const Container = styled.div`
+const Container = styled.main`
   width: 100%;
   min-height: 100vh;
   background-image: url('/images/background-1.jpg');
@@ -48,7 +48,7 @@ const Container = styled.div`
   background-attachment: fixed;
 `
 
-const AboutWrap = styled.div`
+const AboutWrap = styled.section`
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -68,7 +68,7 @@ const AboutWrap = styled.div`
     min-width: 320px;
   }
 `
-const TextWrap = styled.div`
+const TextWrap = styled.section`
   width: 100%;
   min-height: calc(85vh - var(--navbarHeight));
   background: rgba(0, 0, 0, 0.5);

@@ -5,13 +5,13 @@ import logo from '../../logo.svg'
 import './Footer.css'
 const Footer = () => {
   return (
-    <div className='footer-container'>
+    <footer className='footer-container'>
       <section className='footer-links'>
-        <div className='footer-nav-items'>
+        <nav className='footer-nav-items' aria-label='Footer Navigation'>
           <Link to='/about'>About Us</Link>
           <Link to='/contact'>Contact Us</Link>
           <Link to='/terms'>Terms of Use</Link>
-        </div>
+        </nav>
       </section>
       <section className='social-media'>
         <div className='social-media-wrapper'>
@@ -21,7 +21,7 @@ const Footer = () => {
             </Link>
           </div>
           <small className='website-rights'>© 2021 How Animal Sounds</small>
-          <div className='social-icons'>
+          <nav className='social-icons' aria-label='Social Navigation'>
             <a
               className='social-icon-link facebook'
               href='https://www.facebook.com/'
@@ -66,10 +66,10 @@ const Footer = () => {
                 <FiYoutube />
               </i>
             </a>
-          </div>
+          </nav>
         </div>
       </section>
-    </div>
+    </footer>
   )
 }
 

@@ -117,7 +117,7 @@ const Terms = () => {
 
 export default Terms
 
-const Container = styled.div`
+const Container = styled.main`
   padding: 30px calc(3.5vw + 5px);
   overflow: hidden;
   background: url('/images/home-background.png') cover no-repeat fixed center;
@@ -127,7 +127,7 @@ const Container = styled.div`
   align-items: center;
 `
 
-const TextWrap = styled.div`
+const TextWrap = styled.article`
   width: 700px;
   h2 {
     text-align: center;
