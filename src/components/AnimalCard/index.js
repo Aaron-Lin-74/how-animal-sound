@@ -13,7 +13,7 @@ function AnimalCard({ name, imageURL, audioURL, link, showMini }) {
         <img
           className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
           src={imageURL}
-          alt={`${name} is making sound`}
+          alt={`Click ${name} to make sound`}
           onClick={toggle}
           onMouseLeave={stopPlaying}
         />

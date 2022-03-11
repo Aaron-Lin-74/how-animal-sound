@@ -19,7 +19,7 @@ const Error = () => {
 }
 
 export default Error
-const Container = styled.div`
+const Container = styled.main`
   width: 100%;
   min-height: calc(100vh - var(--navbarHeight));
   background-image: url('/images/error-background.gif');

@@ -32,6 +32,7 @@ function Subscription() {
               name='email'
               className='footer-input'
               placeholder='Your Email'
+              aria-label='Input Email address to subscribe'
               required
               onChange={(e) => setEmail(e.target.value)}
             />

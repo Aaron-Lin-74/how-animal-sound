@@ -20,8 +20,8 @@ const Navbar = () => {
   const closeMobileMenu = () => setClick(false)
   const currentUser = useAuth()
   return (
-    <nav className='navbar'>
-      <div className='nav-center'>
+    <header className='header'>
+      <nav className='navbar' aria-label='Main Navigation'>
         <div className='nav-header'>
           <Link to='/'>
             <img
@@ -31,7 +31,12 @@ const Navbar = () => {
               onClick={closeMobileMenu}
             />
           </Link>
-          <button className={'nav-toggle'} onClick={toggleMenu}>
+          <button
+            className={'nav-toggle'}
+            onClick={toggleMenu}
+            title={click ? 'close menu' : 'open menu'}
+            aria-label={click ? 'close menu' : 'open menu'}
+          >
             {click ? <FcPrevious /> : <FcMenu />}
           </button>
         </div>
@@ -96,8 +101,8 @@ const Navbar = () => {
             )}
           </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }
 

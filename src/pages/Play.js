@@ -51,12 +51,12 @@ const Play = () => {
     }
   }
   return (
-    <div>
+    <main>
       <PlayContext.Provider value={{ playRandomSound, checkResult, playing }}>
         <Playbar />
         <Gallery mode='play' />
       </PlayContext.Provider>
-    </div>
+    </main>
   )
 }
 
