@@ -1,9 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useGlobalContext } from '../../contexts/AppContext'
+import { ACTIONS, useGlobalContext } from '../../contexts/AppContext'
 
 function Viewers() {
-  const { setAnimalType } = useGlobalContext()
+  const { dispatch } = useGlobalContext()
+  const setAnimalType = (animalType) => {
+    dispatch({ type: ACTIONS.SET_ANIMALTYPE, payload: { animalType } })
+  }
   return (
     <Container>
       <Wrap onClick={() => setAnimalType('')} aniType='all'>

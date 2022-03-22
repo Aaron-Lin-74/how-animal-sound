@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useCallback } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import { animalsRef, getDocs } from '../firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
 
@@ -12,7 +12,7 @@ const initialState = {
 }
 
 // Avoid hardcoded action strings, to reduce the bugs
-const ACTIONS = {
+export const ACTIONS = {
   SET_ANIMALS: 'SET_ANIMALS',
   OPEN_LOADING: 'OPEN_LOADING',
   CLOSE_LOADING: 'CLOSE_LOADING',
@@ -69,22 +69,11 @@ const AppProvider = ({ children }) => {
     loadAnimals(q)
   }, [state.animalType])
 
-  // For referential equality as this function is in the dependency array of another hook
-  const setSearchTerm = useCallback(
-    (searchTerm) =>
-      dispatch({ type: ACTIONS.SET_SEARCHTERM, payload: { searchTerm } }),
-    []
-  )
-
   return (
     <AppContext.Provider
       value={{
-        animals: state.animals,
-        searchTerm: state.searchTerm,
-        setSearchTerm,
-        loading: state.loading,
-        setAnimalType: (animalType) =>
-          dispatch({ type: ACTIONS.SET_ANIMALTYPE, payload: { animalType } }),
+        state,
+        dispatch,
       }}
     >
       {children}

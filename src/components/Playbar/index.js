@@ -1,14 +1,13 @@
 import React, { useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PlayContext } from '../../pages/Play'
-import { useGlobalContext } from '../../contexts/AppContext'
+import { ACTIONS, useGlobalContext } from '../../contexts/AppContext'
 import { FcSearch } from 'react-icons/fc'
 
 const Playbar = () => {
   const playButtonRef = useRef(null)
   const { playRandomSound, playing } = useContext(PlayContext)
-  const { setSearchTerm } = useGlobalContext()
-  const searchValue = useRef(null)
+  const { state, dispatch } = useGlobalContext()
   return (
     <Container>
       <h2>Which animal did you hear?</h2>
@@ -20,9 +19,14 @@ const Playbar = () => {
         <input
           id='name'
           type='text'
-          ref={searchValue}
+          value={state.searchTerm}
           placeholder='Search...'
-          onChange={() => setSearchTerm(searchValue.current.value)}
+          onChange={(e) =>
+            dispatch({
+              type: ACTIONS.SET_SEARCHTERM,
+              payload: { searchTerm: e.target.value },
+            })
+          }
         />
       </SearchContainer>
     </Container>
