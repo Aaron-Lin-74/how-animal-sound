@@ -6,7 +6,9 @@ import { useGlobalContext } from '../contexts/AppContext'
 export const PlayContext = React.createContext()
 
 const Play = () => {
-  const { animals } = useGlobalContext()
+  const {
+    state: { animals },
+  } = useGlobalContext()
   const [playing, setPlaying] = useState(false)
 
   // useRef does not trigger the re-render
