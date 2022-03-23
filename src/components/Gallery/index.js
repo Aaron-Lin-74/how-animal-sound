@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ACTIONS, useGlobalContext } from '../../contexts/AppContext'
+import { useGlobalContext, setSearchTerm } from '../../contexts/AppContext'
 import styled from 'styled-components'
 import AnimalCard from '../AnimalCard'
 import PlayCard from '../PlayCard'
@@ -17,7 +17,7 @@ const Gallery = ({ mode }) => {
   // Local copy of the fetched animals, so that we can sort and filter on it
   const [localAnimals, setLocalAnimals] = useState([])
   useEffect(() => {
-    dispatch({ type: ACTIONS.SET_SEARCHTERM, payload: { searchTerm: '' } })
+    dispatch(setSearchTerm(''))
     setLocalAnimals(animals)
   }, [animals, dispatch])
 

@@ -20,6 +20,40 @@ export const ACTIONS = {
   SET_ANIMALTYPE: 'SET_ANIMALTYPE',
 }
 
+// Action creators
+export const setAnimals = (animals) => {
+  return {
+    type: ACTIONS.SET_ANIMALS,
+    payload: { animals },
+  }
+}
+
+export const openLoading = () => {
+  return {
+    type: ACTIONS.OPEN_LOADING,
+  }
+}
+
+export const closeLoading = () => {
+  return {
+    type: ACTIONS.CLOSE_LOADING,
+  }
+}
+
+export const setSearchTerm = (searchTerm) => {
+  return {
+    type: ACTIONS.SET_SEARCHTERM,
+    payload: { searchTerm },
+  }
+}
+
+export const setAnimalType = (animalType) => {
+  return {
+    type: ACTIONS.SET_ANIMALTYPE,
+    payload: { animalType },
+  }
+}
+
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_ANIMALS:
@@ -44,18 +78,18 @@ const AppProvider = ({ children }) => {
   // Fetch the animals from server when animalType changes
   useEffect(() => {
     const loadAnimals = async (animalQuery) => {
-      dispatch({ type: ACTIONS.OPEN_LOADING })
+      dispatch(openLoading())
       try {
         const querySnapshot = await getDocs(animalQuery)
         const result = []
         querySnapshot.forEach((doc) => {
           result.push(doc.data())
         })
-        dispatch({ type: ACTIONS.SET_ANIMALS, payload: { animals: result } })
+        dispatch(setAnimals(result))
       } catch (err) {
         console.log(err)
       } finally {
-        dispatch({ type: ACTIONS.CLOSE_LOADING })
+        dispatch(closeLoading())
       }
     }
     const animalQuery = query(animalsRef, orderBy('name', 'desc'), limit(100))
