@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { ACTIONS, useGlobalContext } from '../../contexts/AppContext'
+import { setSearchTerm, useGlobalContext } from '../../contexts/AppContext'
 
 const SearchForm = () => {
   const { state, dispatch } = useGlobalContext()
@@ -20,12 +20,7 @@ const SearchForm = () => {
           type='text'
           ref={searchValue}
           value={state.searchTerm}
-          onChange={(e) =>
-            dispatch({
-              type: ACTIONS.SET_SEARCHTERM,
-              payload: { searchTerm: e.target.value },
-            })
-          }
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
       </form>
     </section>

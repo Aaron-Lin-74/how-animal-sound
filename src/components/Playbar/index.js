@@ -1,7 +1,7 @@
 import React, { useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PlayContext } from '../../pages/Play'
-import { ACTIONS, useGlobalContext } from '../../contexts/AppContext'
+import { useGlobalContext, setSearchTerm } from '../../contexts/AppContext'
 import { FcSearch } from 'react-icons/fc'
 
 const Playbar = () => {
@@ -21,12 +21,7 @@ const Playbar = () => {
           type='text'
           value={state.searchTerm}
           placeholder='Search...'
-          onChange={(e) =>
-            dispatch({
-              type: ACTIONS.SET_SEARCHTERM,
-              payload: { searchTerm: e.target.value },
-            })
-          }
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
       </SearchContainer>
     </Container>
