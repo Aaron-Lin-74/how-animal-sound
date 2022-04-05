@@ -25,7 +25,12 @@
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "semi": "off",
+    "quotes": ["warn", "single"],
+    "jsx-quotes": ["error", "prefer-single"],
+    "linebreak-style": ["error", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
   "settings": {
     "react": {
