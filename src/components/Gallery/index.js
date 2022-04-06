@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useGlobalContext, setSearchTerm } from '../../contexts/AppContext'
 import styled from 'styled-components'
-import AnimalCard from '../AnimalCard'
-import PlayCard from '../PlayCard'
 import {
   FcAlphabeticalSortingAz,
   FcAlphabeticalSortingZa,
   FcProcess,
   FcGrid,
 } from 'react-icons/fc'
+import { useGlobalContext, setSearchTerm } from '../../contexts/AppContext'
+import AnimalCard from '../AnimalCard'
+import PlayCard from '../PlayCard'
 
-const Gallery = ({ mode }) => {
+function Gallery({ mode }) {
   const { state, dispatch } = useGlobalContext()
   const { animals, loading, searchTerm } = state
 
@@ -45,7 +45,7 @@ const Gallery = ({ mode }) => {
 
   // Sort the animals by name A-Z
   const sortAnimals = () => {
-    setLocalAnimals((localAnimals) => [
+    setLocalAnimals(() => [
       ...localAnimals.sort((animal1, animal2) => {
         if (animal1.name < animal2.name) {
           return -1
@@ -60,7 +60,7 @@ const Gallery = ({ mode }) => {
 
   // Sort the animals by name in descent order Z-A
   const sortAnimalsDesc = () => {
-    setLocalAnimals((localAnimals) => [
+    setLocalAnimals(() => [
       ...localAnimals.sort((animal1, animal2) => {
         if (animal1.name < animal2.name) {
           return 1
@@ -75,65 +75,57 @@ const Gallery = ({ mode }) => {
 
   // Randomly order the animals
   const shuffleAnimals = () => {
-    setLocalAnimals((localAnimals) => [
-      ...localAnimals.sort(() => {
-        return 0.5 - Math.random()
-      }),
-    ])
+    setLocalAnimals(() => [...localAnimals.sort(() => 0.5 - Math.random())])
   }
 
   return (
     <GalleryContainer>
       <BtnsContainer>
-        <button onClick={sortAnimals}>
+        <button type='button' onClick={sortAnimals}>
           <FcAlphabeticalSortingAz />
           <span>Sort A-Z</span>
         </button>
-        <button onClick={sortAnimalsDesc}>
+        <button type='button' onClick={sortAnimalsDesc}>
           <FcAlphabeticalSortingZa />
           <span>Sort Z-A</span>
         </button>
-        <button onClick={shuffleAnimals}>
+        <button type='button' onClick={shuffleAnimals}>
           <FcProcess />
           <span>Shuffle</span>
         </button>
-        <button onClick={toggleMini}>
+        <button type='button' onClick={toggleMini}>
           <FcGrid />
           <span>{showMini ? 'Normal' : 'Mini'}</span>
         </button>
       </BtnsContainer>
       <CardContainer className={`${showMini ? 'card-grid-mini' : 'card-grid'}`}>
-        {loading ? (
+        {loading && (
           <LoadingContainer>
             <ImgContainer>
               <img src='/images/loading.gif' alt='loading...' />
             </ImgContainer>
           </LoadingContainer>
-        ) : mode === 'play' ? (
-          localAnimals.map((animal) => {
-            return (
-              <PlayCard
-                key={animal.name}
-                name={animal.name}
-                imageURL={animal.imageURL}
-                showMini={showMini}
-              />
-            )
-          })
-        ) : (
-          localAnimals.map((animal) => {
-            return (
-              <AnimalCard
-                key={animal.name}
-                name={animal.name}
-                imageURL={animal.imageURL}
-                audioURL={animal.audioURL}
-                link={animal.link}
-                showMini={showMini}
-              />
-            )
-          })
         )}
+        {!loading &&
+          (mode === 'play'
+            ? localAnimals.map((animal) => (
+                <PlayCard
+                  key={animal.name}
+                  name={animal.name}
+                  imageURL={animal.imageURL}
+                  showMini={showMini}
+                />
+              ))
+            : localAnimals.map((animal) => (
+                <AnimalCard
+                  key={animal.name}
+                  name={animal.name}
+                  imageURL={animal.imageURL}
+                  audioURL={animal.audioURL}
+                  link={animal.link}
+                  showMini={showMini}
+                />
+              )))}
       </CardContainer>
     </GalleryContainer>
   )

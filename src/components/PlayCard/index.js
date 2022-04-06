@@ -1,12 +1,19 @@
-import React, { useRef, useContext } from 'react'
-import { PlayContext } from '../../pages/Play'
+import React, { useRef } from 'react'
+import { usePlayContext } from '../../contexts/PlayContext'
 
-const PlayCard = ({ name, imageURL, showMini }) => {
-  const { checkResult } = useContext(PlayContext)
+function PlayCard({ name, imageURL, showMini }) {
+  const { checkResult } = usePlayContext()
   const divRef = useRef(null)
 
   return (
-    <div className='animal-card' ref={divRef} onClick={() => checkResult(name)}>
+    <div
+      className='animal-card'
+      role='button'
+      ref={divRef}
+      onClick={() => checkResult(name)}
+      onKeyDown={() => checkResult(name)}
+      tabIndex={0}
+    >
       <div className='animal-card-inner'>
         <div className='animal-card-front'>
           <img
@@ -17,7 +24,7 @@ const PlayCard = ({ name, imageURL, showMini }) => {
           <p>{name}</p>
         </div>
         <div className='animal-card-back'>
-          <p> {name}</p>
+          <p>{name}</p>
         </div>
       </div>
     </div>

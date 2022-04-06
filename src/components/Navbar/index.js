@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Navbar.css'
-import logo from '../../logo.svg'
 import { FcMenu, FcPrevious } from 'react-icons/fc'
 import {
   AiFillHome,
@@ -10,30 +9,30 @@ import {
 } from 'react-icons/ai'
 import { IoMdCloudUpload } from 'react-icons/io'
 import { RiSearchFill } from 'react-icons/ri'
-import { signOutUser } from '../../firebase'
 import { Link } from 'react-router-dom'
+import { signOutUser } from '../../firebase'
+import logo from '../../logo.svg'
 import useAuth from '../../hooks/useAuth'
 
-const Navbar = () => {
+function Navbar() {
   const [click, setClick] = useState(false)
   const toggleMenu = () => setClick(!click)
   const closeMobileMenu = () => setClick(false)
   const currentUser = useAuth()
+  const loginAsAdmin = () =>
+    currentUser && currentUser.email === process.env.REACT_APP_ADMIN_EMAIL
+
   return (
     <header className='header'>
       <nav className='navbar' aria-label='Main Navigation'>
         <div className='nav-header'>
-          <Link to='/'>
-            <img
-              src={logo}
-              alt='logo'
-              className='logo'
-              onClick={closeMobileMenu}
-            />
+          <Link to='/' onClick={closeMobileMenu}>
+            <img src={logo} alt='logo' className='logo' />
           </Link>
           <button
-            className={'nav-toggle'}
+            className='nav-toggle'
             onClick={toggleMenu}
+            type='button'
             title={click ? 'close menu' : 'open menu'}
             aria-label={click ? 'close menu' : 'open menu'}
           >
@@ -42,52 +41,55 @@ const Navbar = () => {
         </div>
 
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-          <li className='nav-links' onClick={closeMobileMenu}>
-            <Link to='/'>
+          <li className='nav-links'>
+            <Link to='/' onClick={closeMobileMenu}>
               <AiFillHome />
               Home
             </Link>
           </li>
           {currentUser && (
-            <li className='nav-links' onClick={closeMobileMenu}>
-              <Link to='/play'>
+            <li className='nav-links'>
+              <Link to='/play' onClick={closeMobileMenu}>
                 <AiFillPlaySquare />
                 Play
               </Link>
             </li>
           )}
-          {currentUser &&
-            currentUser.email === process.env.REACT_APP_ADMIN_EMAIL && (
-              <li className='nav-links' onClick={closeMobileMenu}>
-                <Link to='/upload'>
-                  <IoMdCloudUpload />
-                  Upload
-                </Link>
-              </li>
-            )}
-          <li className='nav-links' onClick={closeMobileMenu}>
-            <Link to='/about'>
+          {loginAsAdmin() && (
+            <li className='nav-links'>
+              <Link to='/upload' onClick={closeMobileMenu}>
+                <IoMdCloudUpload />
+                Upload
+              </Link>
+            </li>
+          )}
+          <li className='nav-links'>
+            <Link to='/about' onClick={closeMobileMenu}>
               <AiFillInfoCircle />
               About
             </Link>
           </li>
-          <li className='nav-links' onClick={closeMobileMenu}>
-            <Link to='/contact'>
+          <li className='nav-links'>
+            <Link to='/contact' onClick={closeMobileMenu}>
               <AiFillContacts />
               Contact
             </Link>
           </li>
 
-          <li className='nav-links' onClick={closeMobileMenu}>
-            <Link to='/search'>
+          <li className='nav-links'>
+            <Link to='/search' onClick={closeMobileMenu}>
               <RiSearchFill />
               Search
             </Link>
           </li>
 
-          <li className='nav-links' onClick={closeMobileMenu}>
+          <li className='nav-links'>
             {currentUser ? (
-              <Link to='/login' onClick={signOutUser} id='logout'>
+              <Link
+                to='/login'
+                onClick={(signOutUser, closeMobileMenu)}
+                id='logout'
+              >
                 <div className='wrap'>
                   <img
                     className='profile'

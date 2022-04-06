@@ -1,17 +1,22 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
-import { PlayContext } from '../../pages/Play'
-import { useGlobalContext, setSearchTerm } from '../../contexts/AppContext'
 import { FcSearch } from 'react-icons/fc'
+import { usePlayContext } from '../../contexts/PlayContext'
+import { useGlobalContext, setSearchTerm } from '../../contexts/AppContext'
 
-const Playbar = () => {
+function Playbar() {
   const playButtonRef = useRef(null)
-  const { playRandomSound, playing } = useContext(PlayContext)
+  const { playRandomSound, playing } = usePlayContext()
   const { state, dispatch } = useGlobalContext()
   return (
     <Container>
       <h2>Which animal did you hear?</h2>
-      <button ref={playButtonRef} onClick={playRandomSound} disabled={playing}>
+      <button
+        ref={playButtonRef}
+        onClick={playRandomSound}
+        disabled={playing}
+        type='button'
+      >
         Play
       </button>
       <SearchContainer>
