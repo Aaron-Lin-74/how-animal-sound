@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Zoom, Fade } from 'react-awesome-reveal'
 
-const About = () => {
+function About() {
   return (
     <Container>
       <AboutWrap>

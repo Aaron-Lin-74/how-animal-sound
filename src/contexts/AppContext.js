@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer } from 'react'
-import { animalsRef, getDocs } from '../firebase'
 import { query, orderBy, limit, where } from 'firebase/firestore'
+import { animalsRef, getDocs } from '../firebase'
 
 const AppContext = React.createContext()
 
@@ -21,38 +21,28 @@ export const ACTIONS = {
 }
 
 // Action creators
-export const setAnimals = (animals) => {
-  return {
-    type: ACTIONS.SET_ANIMALS,
-    payload: { animals },
-  }
-}
+export const setAnimals = (animals) => ({
+  type: ACTIONS.SET_ANIMALS,
+  payload: { animals },
+})
 
-export const openLoading = () => {
-  return {
-    type: ACTIONS.OPEN_LOADING,
-  }
-}
+export const openLoading = () => ({
+  type: ACTIONS.OPEN_LOADING,
+})
 
-export const closeLoading = () => {
-  return {
-    type: ACTIONS.CLOSE_LOADING,
-  }
-}
+export const closeLoading = () => ({
+  type: ACTIONS.CLOSE_LOADING,
+})
 
-export const setSearchTerm = (searchTerm) => {
-  return {
-    type: ACTIONS.SET_SEARCHTERM,
-    payload: { searchTerm },
-  }
-}
+export const setSearchTerm = (searchTerm) => ({
+  type: ACTIONS.SET_SEARCHTERM,
+  payload: { searchTerm },
+})
 
-export const setAnimalType = (animalType) => {
-  return {
-    type: ACTIONS.SET_ANIMALTYPE,
-    payload: { animalType },
-  }
-}
+export const setAnimalType = (animalType) => ({
+  type: ACTIONS.SET_ANIMALTYPE,
+  payload: { animalType },
+})
 
 function reducer(state, action) {
   switch (action.type) {
@@ -72,7 +62,7 @@ function reducer(state, action) {
       return state
   }
 }
-const AppProvider = ({ children }) => {
+function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   // Fetch the animals from server when animalType changes
@@ -99,12 +89,13 @@ const AppProvider = ({ children }) => {
       orderBy('name', 'desc'),
       limit(16)
     )
-    let q = state.animalType === '' ? animalQuery : animalQueryByType
+    const q = state.animalType === '' ? animalQuery : animalQueryByType
     loadAnimals(q)
   }, [state.animalType])
 
   return (
     <AppContext.Provider
+      /* eslint-disable-next-line react/jsx-no-constructed-context-values */
       value={{
         state,
         dispatch,
@@ -115,8 +106,6 @@ const AppProvider = ({ children }) => {
   )
 }
 
-export const useGlobalContext = () => {
-  return useContext(AppContext)
-}
+export const useGlobalContext = () => useContext(AppContext)
 
 export { AppContext, AppProvider }

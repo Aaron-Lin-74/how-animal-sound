@@ -1,10 +1,10 @@
 import React from 'react'
+import styled from 'styled-components'
 import Gallery from '../components/Gallery'
 import Viewers from '../components/Viewers'
-import styled from 'styled-components'
 import Subscription from '../components/Subscription'
 
-const Home = () => {
+function Home() {
   return (
     <Container>
       <Viewers />

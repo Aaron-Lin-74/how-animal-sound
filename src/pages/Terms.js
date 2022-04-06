@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Terms = () => {
+function Terms() {
   return (
     <Container>
       <TextWrap>
@@ -43,7 +43,7 @@ const Terms = () => {
           processing, distribution, or any form of commercialization beyond the
           scope of the copyright law requires the written consent of the
           respective author or creator. Copies and downloads are allowed solely
-          for private and non-commercial purposes. Insofar as this page's
+          for private and non-commercial purposes. Insofar as this page&apos;s
           contents were not created by its operator, third-party copyrights will
           be respected and observed. Should you still have reason to believe
           that a copyright violation has occurred despite the precautionary

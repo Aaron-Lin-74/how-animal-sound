@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const ThankYou = () => {
+function ThankYou() {
   return (
     <Container>
       <h1>Thank You!</h1>

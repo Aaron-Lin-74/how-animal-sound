@@ -1,21 +1,24 @@
 import React from 'react'
 import { FcSpeaker } from 'react-icons/fc'
-import useAudio from '../../hooks/useAudio'
 import styled from 'styled-components'
 import { Fade } from 'react-awesome-reveal'
+import useAudio from '../../hooks/useAudio'
 
 function AnimalCard({ name, imageURL, audioURL, link, showMini }) {
   const { playing, toggle, stopPlaying } = useAudio(audioURL)
 
   return (
     <Fade>
-      <Container>
+      <Container
+        role='button'
+        onClick={toggle}
+        onKeyDown={toggle}
+        onMouseLeave={stopPlaying}
+      >
         <img
           className={`${showMini ? 'animal-img-mini' : 'animal-img'}`}
           src={imageURL}
           alt={`Click ${name} to make sound`}
-          onClick={toggle}
-          onMouseLeave={stopPlaying}
         />
         {!showMini && (
           <FooterContainer>
@@ -25,7 +28,8 @@ function AnimalCard({ name, imageURL, audioURL, link, showMini }) {
               target='_blank'
               rel='noreferrer'
             >
-              Learn {name}
+              Learn
+              {name}
               {playing && <FcSpeaker />}
             </a>
           </FooterContainer>

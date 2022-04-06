@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Fade } from 'react-awesome-reveal'
 
-const Error = () => {
+function Error() {
   return (
     <Container>
       <Fade left>
@@ -11,7 +11,9 @@ const Error = () => {
       </Fade>
       <Fade>
         <h2>
-          Click <Link to='/'>here</Link> to go back to the home page.
+          Click
+          <Link to='/'>here</Link>
+          to go back to the home page.
         </h2>
       </Fade>
     </Container>
