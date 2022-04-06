@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { addDoc, animalsRef } from '../../firebase'
 import styled from 'styled-components'
 import {
   getStorage,
@@ -7,8 +6,9 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
+import { addDoc, animalsRef } from '../../firebase'
 
-function Upload({ currentUser }) {
+function Upload() {
   const [name, setName] = useState('')
   const [link, setLink] = useState('')
   const [type, setType] = useState('mammal')
@@ -33,9 +33,9 @@ function Upload({ currentUser }) {
 
       // 3 - Create a new document in the firestore DB.
       await addDoc(animalsRef, {
-        name: name,
-        link: link,
-        type: type,
+        name,
+        link,
+        type,
         imageURL: publicImageUrl,
         audioURL: publicAudioUrl,
         imgStorageUri: imageSnapshot.metadata.fullPath,
@@ -59,52 +59,61 @@ function Upload({ currentUser }) {
   return (
     <Container>
       <Form onSubmit={upload}>
-        <label htmlFor='ani-name'>Name</label>
-        <input
-          id='ani-name'
-          name='name'
-          type='text'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <label htmlFor='ani-type'>Type</label>
-        <select
-          id='ani-type'
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        >
-          <option value='mammal'>mammal</option>
-          <option value='bird'>bird</option>
-          <option value='reptile'>reptile</option>
-          <option value='fish'>fish</option>
-          <option value='amphibian'>amphibian</option>
-          <option value='insect'>insect</option>
-        </select>
-        <label htmlFor='ani-link'>Link</label>
-
-        <input
-          id='ani-link'
-          name='link'
-          type='text'
-          value={link}
-          onChange={(e) => setLink(e.target.value)}
-          required
-        />
-        <label htmlFor='image_uploads'>Upload Image</label>
-        <input
-          type='file'
-          accept='image/*'
-          id='image_uploads'
-          onChange={(e) => setImage(e.target.files[0])}
-        ></input>
-        <label htmlFor='audio_uploads'>Upload Audio</label>
-        <input
-          type='file'
-          accept='audio/*'
-          id='audio_uploads'
-          onChange={(e) => setAudio(e.target.files[0])}
-        ></input>
+        <label htmlFor='ani-name'>
+          Name
+          <input
+            id='ani-name'
+            name='name'
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        <label htmlFor='ani-type'>
+          Type
+          <select
+            id='ani-type'
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option value='mammal'>mammal</option>
+            <option value='bird'>bird</option>
+            <option value='reptile'>reptile</option>
+            <option value='fish'>fish</option>
+            <option value='amphibian'>amphibian</option>
+            <option value='insect'>insect</option>
+          </select>
+        </label>
+        <label htmlFor='ani-link'>
+          Link
+          <input
+            id='ani-link'
+            name='link'
+            type='text'
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            required
+          />
+        </label>
+        <label htmlFor='image_uploads'>
+          Upload Image
+          <input
+            type='file'
+            accept='image/*'
+            id='image_uploads'
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        </label>
+        <label htmlFor='audio_uploads'>
+          Upload Audio
+          <input
+            type='file'
+            accept='audio/*'
+            id='audio_uploads'
+            onChange={(e) => setAudio(e.target.files[0])}
+          />
+        </label>
         <button type='submit'>Submit</button>
       </Form>
     </Container>

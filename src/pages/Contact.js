@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Contact = () => {
+function Contact() {
   return (
     <Container>
       <TextWrapper>
         <h1>Contact Us</h1>
-        <h2>We'd love to hear from you!</h2>
+        <h2>We&apos;d love to hear from you!</h2>
       </TextWrapper>
       <FormWrapper>
         <Form
@@ -27,11 +27,7 @@ const Contact = () => {
             aria-label='email'
             required
           />
-          <textarea
-            name='message'
-            aria-label='message'
-            placeholder='MESSAGE'
-          ></textarea>
+          <textarea name='message' aria-label='message' placeholder='MESSAGE' />
           <input
             type='hidden'
             name='_next'

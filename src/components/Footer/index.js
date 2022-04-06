@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { FiFacebook, FiInstagram, FiTwitter, FiYoutube } from 'react-icons/fi'
 import logo from '../../logo.svg'
 import './Footer.css'
-const Footer = () => {
+
+function Footer() {
   return (
     <footer className='footer-container'>
       <section className='footer-links'>

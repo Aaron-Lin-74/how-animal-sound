@@ -21,6 +21,7 @@ import {
   onSnapshot,
   getDocs,
 } from 'firebase/firestore'
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -54,9 +55,7 @@ const signOutUser = () => {
 }
 
 // Returns true if a user is signed-in.
-const hasUserSignedIn = () => {
-  return !!auth.currentUser
-}
+const hasUserSignedIn = () => !!auth.currentUser
 const animalQuery = query(
   animalsRef,
   where('type', '==', 'bird'),

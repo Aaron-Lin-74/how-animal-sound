@@ -9,7 +9,7 @@ function Subscription() {
   const subscribe = async (e) => {
     e.preventDefault()
     try {
-      await addDoc(subscriptionRef, { email: email })
+      await addDoc(subscriptionRef, { email })
     } catch (error) {
       console.error('Something goes wrong', error)
     }

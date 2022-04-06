@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { signInWithGoogle } from '../../firebase'
 import { Redirect } from 'react-router-dom'
+import { signInWithGoogle } from '../../firebase'
 import useAuth from '../../hooks/useAuth'
 
 function Login() {
