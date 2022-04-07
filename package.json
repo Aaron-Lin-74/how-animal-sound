@@ -1,6 +1,6 @@
 {
   "name": "how-animal-sounds",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "author": "Aaron Lin",
   "description": "A fun web application for kids to learn what each animal sounds like.",
@@ -62,5 +62,14 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aaron-Lin-74/how-animal-sounds.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aaron-Lin-74/how-animal-sounds.git/issues"
+  },
+  "homepage": "https://aaronlin-animal-sounds.web.app/",
+  "license": "MIT"
 }
