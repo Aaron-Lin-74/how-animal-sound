@@ -2,7 +2,11 @@
   "name": "how-animal-sounds",
   "version": "1.1.0",
   "private": true,
-  "author": "Aaron Lin",
+  "author": {
+    "name": "Aaron Lin",
+    "email": "aaronlin74@gmail.com",
+    "url": "https://aaron-lin-74.github.io/personal-portfolio/"
+  },
   "description": "A fun web application for kids to learn what each animal sounds like.",
   "keywords": [
     "animal",
