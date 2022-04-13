@@ -12,6 +12,7 @@ https://aaronlin-animal-sounds.web.app/
 * Used Firebase back-end services for user authentication, object storage, and database.
 * Combined useReducer and useContext hooks to perform state management.
 * Applied styled component to style the components.
+* Set up Eslint with Airbnb Style Guide.
 
 ## Run the application locally
 To run the application locally, clone the repo and install the dependencies:
