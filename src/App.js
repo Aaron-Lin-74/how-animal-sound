@@ -5,6 +5,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom'
+import { ErrorBoundary } from 'react-error-boundary'
 import Home from './pages/Home'
 import About from './pages/About'
 import Play from './pages/Play'
@@ -75,40 +76,42 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <PrivateRoute path='/play'>
-          <Play />
-        </PrivateRoute>
-        <Route path='/about'>
-          <About />
-        </Route>
-        <Route path='/contact'>
-          <Contact />
-        </Route>
-        <Route path='/thankyou'>
-          <ThankYou />
-        </Route>
-        <Route path='/search'>
-          <Search />
-        </Route>
-        <Route path='/terms'>
-          <Terms />
-        </Route>
-        <Route path='/login'>
-          <Login />
-        </Route>
-        <AdminRoute path='/upload'>
-          <Upload currentUser={currentUser} />
-        </AdminRoute>
-        <Route path='*'>
-          <Error />
-        </Route>
-      </Switch>
-      <Footer />
+      <ErrorBoundary FallbackComponent={Error}>
+        <Navbar />
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <PrivateRoute path='/play'>
+            <Play />
+          </PrivateRoute>
+          <Route path='/about'>
+            <About />
+          </Route>
+          <Route path='/contact'>
+            <Contact />
+          </Route>
+          <Route path='/thankyou'>
+            <ThankYou />
+          </Route>
+          <Route path='/search'>
+            <Search />
+          </Route>
+          <Route path='/terms'>
+            <Terms />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <AdminRoute path='/upload'>
+            <Upload currentUser={currentUser} />
+          </AdminRoute>
+          <Route path='*'>
+            <Error header='404' />
+          </Route>
+        </Switch>
+        <Footer />
+      </ErrorBoundary>
     </Router>
   )
 }
