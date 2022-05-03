@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Fade } from 'react-awesome-reveal'
 
-function Error() {
+function Error({ header }) {
   return (
     <Container>
       <Fade left>
-        <h1>Error 404</h1>
+        <h1>Error {header}</h1>
       </Fade>
       <Fade>
         <h2>
