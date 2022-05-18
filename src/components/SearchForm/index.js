@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { setSearchTerm, useGlobalContext } from '../../contexts/AppContext'
 
 function SearchForm() {
-  const { state, dispatch } = useGlobalContext()
+  const { dispatch } = useGlobalContext()
   const searchValue = useRef(null)
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -11,6 +11,17 @@ function SearchForm() {
   useEffect(() => {
     searchValue.current.focus()
   }, [])
+
+  const debounce = (delay = 300) => {
+    let timeoutId
+    return (event) => {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        dispatch(setSearchTerm(event.target.value))
+      }, delay)
+    }
+  }
+
   return (
     <section className='search'>
       <form onSubmit={handleSubmit} className='search-form'>
@@ -20,8 +31,7 @@ function SearchForm() {
             id='name'
             type='text'
             ref={searchValue}
-            value={state.searchTerm}
-            onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+            onChange={debounce(500)}
           />
         </label>
       </form>
